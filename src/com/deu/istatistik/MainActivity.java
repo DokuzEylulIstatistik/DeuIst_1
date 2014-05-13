@@ -98,6 +98,10 @@ public class MainActivity extends ActionBarActivity implements
 							android.R.anim.slide_out_right)
 					.replace(R.id.container, matrisfragment).commit();
 
+		} else if (position == 6) {
+			Intent intent = new Intent(this, ActivityDagilim.class);
+			startActivity(intent);
+
 		}
 
 		// fragmentManager
@@ -151,7 +155,6 @@ public class MainActivity extends ActionBarActivity implements
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

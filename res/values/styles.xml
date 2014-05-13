@@ -1,10 +1,19 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="NotificationTitle">
         <item name="android:textColor">@color/sol_menu_baslik_rengi</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
     </style>
 
+    <style name="matrislinearlayoutrowstyle">
+        <item name="android:padding">5dp</item>
+        <item name="android:weightSum">60</item>
+    </style>
+    <style name="matriseditstyle">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/edittext</item>
+        <item name="android:padding">5dp</item>
+    </style>
     <style name="baslikStyle1">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>

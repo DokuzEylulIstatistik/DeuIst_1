@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 import com.jjoe64.graphview.BarGraphView;
@@ -128,6 +129,7 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+
 		// TODO Auto-generated method stub
 		View vi = inflater.inflate(R.layout.tablo, container, false);
 		rootview = vi;
@@ -273,39 +275,52 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 			LinearLayout layout = (LinearLayout) rootview
 					.findViewById(R.id.layout_z);
 
-			if (layout.getChildCount() == 3) {
-				View ww = layout.getChildAt(layout.getChildCount() - 1);
-				layout.removeView(ww);
-			}
+			// if (layout.getChildCount() == 3) {
+			// View ww = layout.getChildAt(layout.getChildCount() - 1);
+			// layout.removeView(ww);
+			// }
 			final String[] ztablo = getResources().getStringArray(
 					R.array.ztablo);
 
+			TextView textview_z_sonuc = (TextView) rootview
+					.findViewById(R.id.textview_z_sonuc);
 			EditText KulGiris = (EditText) rootview
 					.findViewById(R.id.editTxt_z);
+			// KulGiris.setFilters(new InputFilter[] { new InputFilterMinMax(0,
+			// 4) });
 			imm.hideSoftInputFromWindow(KulGiris.getWindowToken(), 0);
 
 			final double x = Double.parseDouble(KulGiris.getText().toString());
 			if (x < 3.5) {
 				double z1 = Double.parseDouble(ztablo[(int) (x * 100)]
 						.substring(0, 4));
+
 				double z2 = Double.parseDouble(ztablo[(int) (x * 100) + 1]
 						.substring(0, 4));
+
 				double y1 = Double.parseDouble(ztablo[(int) (x * 100)]
 						.substring(ztablo[(int) (x * 100)].length() - 6,
 								ztablo[(int) (x * 100)].length()));
-				;
+
 				double y2 = Double.parseDouble(ztablo[(int) (x * 100) + 1]
 						.substring(ztablo[(int) (x * 100) + 1].length() - 6,
 								ztablo[(int) (x * 100) + 1].length()));
-				;
+
 				double sonuc = (y2 - y1) * (x - z1) / (z2 - z1);
 
 				if (Double.toString(sonuc + y1).length() > 6) {
-					kutuphane.getAlertDialog(activity, "Sonuç : ", Double
-							.toString(sonuc + y1).substring(0, 6));
+					// kutuphane.getAlertDialog(activity, "Sonuç : ", Double
+					// .toString(sonuc + y1).substring(0, 6));
+
+					textview_z_sonuc.setText("Sonuç : "
+							+ Double.toString(sonuc + y1).substring(0, 6));
+
 				} else {
-					kutuphane.getAlertDialog(activity, "Sonuç : ",
-							Double.toString(sonuc + y1));
+					// kutuphane.getAlertDialog(activity, "Sonuç : ",
+					// Double.toString(sonuc + y1));
+
+					textview_z_sonuc.setText("Sonuç : "
+							+ Double.toString(sonuc + y1));
 				}
 
 				GraphView graphView = new BarGraphView(activity, "");
@@ -372,20 +387,23 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 				// Color.YELLOW);
 				// graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
 				graphView.getGraphViewStyle().setTextSize(14);
+
 				// getResources().getDimension(R.dimen.big));
 				// graphView.getGraphViewStyle().setNumHorizontalLabels(5);
 				// graphView.getGraphViewStyle().setNumVerticalLabels(4);
 				// graphView.getGraphViewStyle().setVerticalLabelsWidth(300);
 				// data
 
-				layout.addView(graphView);
+				LinearLayout view_tabloresimalan = (LinearLayout) layout
+						.findViewById(R.id.view_tabloresimalan);
+
+				view_tabloresimalan.removeAllViews();
+				view_tabloresimalan.addView(graphView);
 
 			}
 
 			else {
-				kutuphane.getAlertDialog(activity, "Sonuç : ",
-						Double.toString(0.4999));
-				// KulSonuc.setText("0.4999");
+				textview_z_sonuc.setText("Sonuç : " + Double.toString(0.4999));
 			}
 		} catch (Exception e) {
 			kutuphane.getAlertDialog(activity, "Hata",
@@ -422,80 +440,90 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 
 				String sonuc = satir[sutun];
 
-				kutuphane.getAlertDialog(activity, "Sonuç : ", sonuc);
+				// kutuphane.getAlertDialog(activity, "Sonuç : ", sonuc);
+
+				TextView textview_kikare_sonuc = (TextView) rootview
+						.findViewById(R.id.textview_kikare_sonuc);
+				textview_kikare_sonuc.setText("Sonuç : " + sonuc);
 
 				// /////////////////////
-				GraphView graphView = new BarGraphView(activity, "");
 
-				GraphViewSeriesStyle seriesStyle = new GraphViewSeriesStyle();
-
-				seriesStyle.setValueDependentColor(new ValueDependentColor() {
-					@Override
-					public int get(GraphViewDataInterface data) {
-						// the higher the more red
-
-						if (data.getX() >= 0 && data.getX() < deger_int) {
-							return getResources().getColor(R.color.z_icalan);
-						} else {
-							return getResources().getColor(R.color.z_disalan);
-						}
-
-					}
-				});
-				GraphViewDataInterface[] dat = new GraphViewDataInterface[] { new GraphViewData(
-						0, 0) };
-				GraphViewSeries exampleSeries = new GraphViewSeries("Tablo",
-						seriesStyle, dat);
-				int countNumber = 60;
-				double number = -4;
-				for (int i = 0; i < countNumber; i++) {
-
-					GraphViewData dt = new GraphViewData(number, Math.pow(
-							StandartNormal(number), 2));
-					exampleSeries.appendData(dt, true, countNumber);
-
-					double q = (countNumber / 8);
-					q = (1 / q);
-
-					number += q;
-
-				}
-
-				// graphView.setBackground(getResources().getDrawable(
-				// R.drawable.edittext));
-				// graphView.setScalable(true);
-				// graphView.setScrollable(true);
-				graphView.setHorizontalLabels(new String[] { "" });
-				graphView.setVerticalLabels(new String[] { "" });
-				graphView.addSeries(exampleSeries);
-				// graphView.setDrawingCacheBackgroundColor(Color.BLACK);
-
-				// GraphViewSeriesStyle sdf = new GraphViewSeriesStyle();
-
-				// graphView.setHorizontalLabels(new String[] { "2 days ago",
-				// / "yesterday", "today", "tomorrow" });
-				// graphView.setVerticalLabels(new String[] { "high", "middle",
-				// "low" });
-				// graphView.getGraphViewStyle().setGridColor(Color.GREEN);
-				// graphView.getGraphViewStyle().setHorizontalLabelsColor(
-				// Color.YELLOW);
+				// GraphView graphView = new BarGraphView(activity, "");
+				//
+				// GraphViewSeriesStyle seriesStyle = new
+				// GraphViewSeriesStyle();
+				//
+				// seriesStyle.setValueDependentColor(new ValueDependentColor()
+				// {
+				// @Override
+				// public int get(GraphViewDataInterface data) {
+				// // the higher the more red
+				//
+				// if (data.getX() >= 0 && data.getX() < deger_int) {
+				// return getResources().getColor(R.color.z_icalan);
+				// } else {
+				// return getResources().getColor(R.color.z_disalan);
+				// }
+				//
+				// }
+				// });
+				// GraphViewDataInterface[] dat = new GraphViewDataInterface[] {
+				// new GraphViewData(
+				// 0, 0) };
+				// GraphViewSeries exampleSeries = new GraphViewSeries("Tablo",
+				// seriesStyle, dat);
+				// int countNumber = 60;
+				// double number = -4;
+				// for (int i = 0; i < countNumber; i++) {
+				//
+				// GraphViewData dt = new GraphViewData(number, Math.pow(
+				// StandartNormal(number), 2));
+				// exampleSeries.appendData(dt, true, countNumber);
+				//
+				// double q = (countNumber / 8);
+				// q = (1 / q);
+				//
+				// number += q;
+				//
+				// }
+				//
+				// // graphView.setBackground(getResources().getDrawable(
+				// // R.drawable.edittext));
+				// // graphView.setScalable(true);
+				// // graphView.setScrollable(true);
+				// graphView.setHorizontalLabels(new String[] { "" });
+				// graphView.setVerticalLabels(new String[] { "" });
+				// graphView.addSeries(exampleSeries);
+				// // graphView.setDrawingCacheBackgroundColor(Color.BLACK);
+				//
+				// // GraphViewSeriesStyle sdf = new GraphViewSeriesStyle();
+				//
+				// // graphView.setHorizontalLabels(new String[] { "2 days ago",
+				// // / "yesterday", "today", "tomorrow" });
+				// // graphView.setVerticalLabels(new String[] { "high",
+				// "middle",
+				// // "low" });
+				// // graphView.getGraphViewStyle().setGridColor(Color.GREEN);
+				// // graphView.getGraphViewStyle().setHorizontalLabelsColor(
+				// // Color.YELLOW);
+				// //
 				// graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
-				graphView.getGraphViewStyle().setTextSize(14);
-				// getResources().getDimension(R.dimen.big));
-				// graphView.getGraphViewStyle().setNumHorizontalLabels(5);
-				// graphView.getGraphViewStyle().setNumVerticalLabels(4);
-				// graphView.getGraphViewStyle().setVerticalLabelsWidth(300);
-				// data
-
-				layout.addView(graphView);
+				// graphView.getGraphViewStyle().setTextSize(14);
+				// // getResources().getDimension(R.dimen.big));
+				// // graphView.getGraphViewStyle().setNumHorizontalLabels(5);
+				// // graphView.getGraphViewStyle().setNumVerticalLabels(4);
+				// // graphView.getGraphViewStyle().setVerticalLabelsWidth(300);
+				// // data
+				//
+				// layout.addView(graphView);
 
 			} else {
 				kutuphane.getAlertDialog(activity, "Aralýk Hatasý",
-						"Tablo deðerleri dýþýnda deðer girdiniz.");
+						"Lütfen 1 ile 30 arasýnda deðer giriniz.");
 			}
 		} catch (Exception ex) {
 			kutuphane.getAlertDialog(activity, "Giriþ Hatasý",
-					"Tablo deðerleri dýþýnda deðer girdiniz.");
+					"Lütfen doðru giriþ yaptýðýnýzdan emin olunuz.");
 		}
 
 	}
@@ -519,15 +547,19 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 
 				String sonuc = satir[sutun];
 
-				kutuphane.getAlertDialog(activity, "Sonuç : ", sonuc);
+				// kutuphane.getAlertDialog(activity, "Sonuç : ", sonuc);
+
+				TextView textview_student_T_sonuc = (TextView) rootview
+						.findViewById(R.id.textview_student_T_sonuc);
+				textview_student_T_sonuc.setText("Sonuç : " + sonuc);
 
 			} else {
 				kutuphane.getAlertDialog(activity, "Aralýk Hatasý",
-						"Lütfen 1 ile 30 arasýnda deðr giriniz");
+						"Lütfen 1 ile 30 arasýnda deðer giriniz");
 			}
 		} catch (Exception ex) {
 			kutuphane.getAlertDialog(activity, "Giriþ Hatasý",
-					"Tablo deðerleri dýþýnda deðer girdiniz.");
+					"Lütfen doðru giriþ yaptýðýnýzdan emin olunuz.");
 		}
 	}
 
@@ -541,7 +573,7 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 			String deger = alfadeger.getText().toString();
 			int deger_int = Integer.parseInt(deger);
 
-			if (deger_int > 0 && deger_int <= 30) {
+			if (deger_int > 0 && deger_int <= 20) {
 
 				String[] satir = degerler_tukey01.get(deger_int).split(";");
 
@@ -549,15 +581,18 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 
 				String sonuc = satir[sutun];
 
-				kutuphane.getAlertDialog(activity, "Sonuç : ", sonuc);
+				// kutuphane.getAlertDialog(activity, "Sonuç : ", sonuc);
+				TextView textview_tukey01_sonuc = (TextView) rootview
+						.findViewById(R.id.textview_tukey01_sonuc);
+				textview_tukey01_sonuc.setText("Sonuç : " + sonuc);
 
 			} else {
 				kutuphane.getAlertDialog(activity, "Aralýk Hatasý",
-						"Lütfen 1 ile 30 arasýnda deðer giriniz");
+						"Lütfen 1 ile 20 arasýnda deðer giriniz");
 			}
 		} catch (Exception ex) {
 			kutuphane.getAlertDialog(activity, "Giriþ Hatasý",
-					"Tablo deðerleri dýþýnda deðer girdiniz.");
+					"Lütfen doðru giriþ yaptýðýnýzdan emin olunuz.");
 		}
 
 	}
@@ -572,7 +607,7 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 			String deger = alfadeger.getText().toString();
 			int deger_int = Integer.parseInt(deger);
 
-			if (deger_int > 0 && deger_int <= 30) {
+			if (deger_int > 0 && deger_int <= 20) {
 
 				String[] satir = degerler_tukey05.get(deger_int).split(";");
 
@@ -580,15 +615,18 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 
 				String sonuc = satir[sutun];
 
-				kutuphane.getAlertDialog(activity, "Sonuç : ", sonuc);
+				// kutuphane.getAlertDialog(activity, "Sonuç : ", sonuc);
+				TextView textview_tukey05_sonuc = (TextView) rootview
+						.findViewById(R.id.textview_tukey05_sonuc);
+				textview_tukey05_sonuc.setText("Sonuç : " + sonuc);
 
 			} else {
 				kutuphane.getAlertDialog(activity, "Aralýk Hatasý",
-						"Lütfen 1 ile 30 arasýnda deðer giriniz");
+						"Lütfen 1 ile 20 arasýnda deðer giriniz");
 			}
 		} catch (Exception ex) {
 			kutuphane.getAlertDialog(activity, "Giriþ Hatasý",
-					"Tablo deðerleri dýþýnda deðer girdiniz.");
+					"Lütfen doðru giriþ yaptýðýnýzdan emin olunuz.");
 		}
 
 	}
@@ -603,24 +641,28 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 			String deger = alfadeger.getText().toString();
 			int deger_int = Integer.parseInt(deger);
 
-			if (deger_int > 0 && deger_int <= 30) {
+			if (deger_int > 4 && deger_int <= 22) {
 
-				String[] satir = degerler_spearmankorelasyon.get(deger_int)
+				String[] satir = degerler_spearmankorelasyon.get(deger_int - 4)
 						.split(";");
 
 				int sutun = spin_spearmankorelasyon.getSelectedItemPosition();
 
 				String sonuc = satir[sutun];
 
-				kutuphane.getAlertDialog(activity, "Sonuç : ", sonuc);
+				// kutuphane.getAlertDialog(activity, "Sonuç : ", sonuc);
+
+				TextView textview_spearman_sonuc = (TextView) rootview
+						.findViewById(R.id.textview_spearman_sonuc);
+				textview_spearman_sonuc.setText("Sonuç : " + sonuc);
 
 			} else {
 				kutuphane.getAlertDialog(activity, "Aralýk Hatasý",
-						"Lütfen 1 ile 30 arasýnda deðer giriniz");
+						"Lütfen 5 ile 22 arasýnda deðer giriniz");
 			}
 		} catch (Exception ex) {
 			kutuphane.getAlertDialog(activity, "Giriþ Hatasý",
-					"Lütfen 1 ile 30 arasýnda deðer giriniz");
+					"Lütfen doðru giriþ yaptýðýnýzdan emin olunuz.");
 		}
 
 	}

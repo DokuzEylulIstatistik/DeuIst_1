@@ -125,7 +125,7 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setSubtitle(subtitle);
-		actionBar.setTitle("isssst");
+		actionBar.setTitle("Ýstatistik");
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);

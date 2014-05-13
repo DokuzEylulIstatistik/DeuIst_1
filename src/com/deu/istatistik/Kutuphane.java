@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,6 +17,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.text.Html;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.inputmethod.InputMethodManager;
 
 import com.flurry.android.FlurryAgent;
@@ -137,11 +142,30 @@ public class Kutuphane {
 
 	}
 
+	public void sharedPreferencesEdit(Context context, String key, int value) {
+
+		SharedPreferences shr = context.getSharedPreferences(
+				context.getPackageName(), Context.MODE_PRIVATE);
+
+		SharedPreferences.Editor editor = shr.edit();
+		editor.putInt(key, value);
+		editor.commit();
+
+	}
+
 	public String getsharedPreference(Context context, String key) {
 		SharedPreferences shr = context.getSharedPreferences(
 				context.getPackageName(), Context.MODE_PRIVATE);
 
 		return shr.getString(key, null);
+
+	}
+
+	public int getsharedPreferenceInt(Context context, String key) {
+		SharedPreferences shr = context.getSharedPreferences(
+				context.getPackageName(), Context.MODE_PRIVATE);
+
+		return shr.getInt(key, 0);
 
 	}
 
@@ -190,6 +214,4 @@ public class Kutuphane {
 		}
 	}
 
-	
-	
 }

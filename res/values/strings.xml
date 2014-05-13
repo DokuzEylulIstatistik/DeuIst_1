@@ -6,6 +6,7 @@
     <string name="subtitle_desc_stat">Tanımlayıcı İstatistik</string>
     <string name="subtitle_duyurular">Dokuz Eylül Üniversitesi</string>
     <string name="subtitle_tablo">Tablo Değerleri</string>
+    <string name="subtitle_matris">Matris</string>
     <!-- SON -->
 
 
@@ -20,6 +21,7 @@
         <item>Tanımlayıcı İstatistik</item>
         <item>Tablo Değerleri</item>
         <item>Matris</item>
+        <item>Dağılımlar</item>
     </string-array>
     <string-array name="menulist_icon">
         <item>Duyuru_100.png</item>
@@ -27,6 +29,7 @@
         <item>harita_100.png</item>
         <item>tanimlayici_100.png</item>
         <item>Tablo_100.png</item>
+        <item>Matris_100.png</item>
         <item>Matris_100.png</item>
     </string-array>
     <!-- SON -->
@@ -58,8 +61,23 @@
     <!-- ////////////////////// -->
 
 
-    <!-- Description Stast -->
-    <string name="title_descriptionstats">Descriptive Stats</string>
+    <!-- Matris -->
+    <string name="matrisboyutuyari">Min : 2 x 2 - Max : 5 x 5</string>
+
+    <string-array name="islemlist">
+        <item>Matrisin tersini al</item>
+        <!-- <item>İki matrisi topla</item> -->
+        <!-- <item>İki matrisi Çarp</item> -->
+
+    </string-array>
+    <string-array name="islemlist_val">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Descriptive Statistics -->
+    <string name="title_descriptionstats">Tanımlayıcı İstatistik</string>
     <string name="desc_aciklama">Lütfen her satıra bir sayi gelecek şekilde giriş yapınız.</string>
     <string name="menu_regresyon">Regresyon</string>
     <string name="menu_outlier">Uç değerler</string>
@@ -117,9 +135,9 @@
         <item>Calculus II,4</item>
         <item>Atatürk İlkeleri ve İnkılap Tarihi II,2</item>
         <item>Türk Dili II,2</item>
-        <item>Beden Eğitimi,2</item>
-        <item>Halk Oyunları,2</item>
-        <item>Müzik,2</item>
+        <item>Beden Eğitimi,0</item>
+        <item>Halk Oyunları,0</item>
+        <item>Müzik,0</item>
     </string-array>
     <string-array name="sinif2donem1">
         <item>Probleme Dayalı Öğrenme III,2</item>
@@ -641,5 +659,7 @@
         <item>3.48,0.4997</item>
         <item>3.49,0.4998</item>
     </string-array>
+
+    <string name="title_activity_activity_dagilim">ActivityDagilim</string>
 
 </resources>

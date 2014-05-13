@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.util.Xml;
 
@@ -32,10 +33,15 @@ public class estatXmlParser {
 			IOException {
 		try {
 
-			XmlPullParser parser = Xml.newPullParser();
+
+			XmlPullParserFactory we = XmlPullParserFactory.newInstance();
+
+			XmlPullParser parser = we.newPullParser();
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-			// parser.setInput(in, null);
-			parser.setInput(in, "ISO-8859-9");
+		    //parser.setInput(in, null);
+		    parser.setInput(in, "ISO-8859-9");
+
+
 			parser.nextTag();
 			parser.nextTag();
 			return readFeed(parser);

@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="invisible" >
+            android:visibility="visible" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,6 +59,22 @@
                 android:onClick="btn_z_Click"
                 android:text="Hesapla" />
 
+            <TextView
+                android:id="@+id/textview_z_sonuc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="@dimen/tablo_sonuc_textSize" />
+
+            <LinearLayout
+                android:id="@+id/view_tabloresimalan"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical" >
+            </LinearLayout>
+
             <!-- <ImageView -->
             <!-- android:layout_width="wrap_content" -->
             <!-- android:layout_height="wrap_content" -->
@@ -76,29 +92,31 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3" >
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:gravity="center"
-                    android:text="Serbestlik Derecesi" />
+                    android:text="sd" />
 
                 <EditText
                     android:id="@+id/editTxt_kikare_sd"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:background="@drawable/edittext"
                     android:gravity="center"
                     android:inputType="number" />
 
                 <Spinner
                     android:id="@+id/spinner_kikare_alfa"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="2" />
             </LinearLayout>
 
             <Button
@@ -109,6 +127,14 @@
                 android:text="Hesapla" >
             </Button>
 
+            <TextView
+                android:id="@+id/textview_kikare_sonuc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="@dimen/tablo_sonuc_textSize" />
             <!-- <ImageView -->
             <!-- android:layout_width="wrap_content" -->
             <!-- android:layout_height="wrap_content" -->
@@ -123,33 +149,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone"
+            android:weightSum="3" >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:gravity="center"
-                    android:text="Serbestlik Derecesi" />
+                    android:text="sd" />
 
                 <EditText
                     android:id="@+id/editTxt_studentSd"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:background="@drawable/edittext"
                     android:gravity="center"
                     android:inputType="number" />
 
                 <Spinner
                     android:id="@+id/spinner_student_alfa"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="2" />
             </LinearLayout>
 
             <Button
@@ -160,6 +187,14 @@
                 android:text="Hesapla" >
             </Button>
 
+            <TextView
+                android:id="@+id/textview_student_T_sonuc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="@dimen/tablo_sonuc_textSize" />
             <!-- <ImageView -->
             <!-- android:layout_width="wrap_content" -->
             <!-- android:layout_height="wrap_content" -->
@@ -177,29 +212,31 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3" >
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:gravity="center"
                     android:text="V" />
 
                 <EditText
                     android:id="@+id/editTxt_tukey01"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:background="@drawable/edittext"
                     android:gravity="center"
                     android:inputType="number" />
 
                 <Spinner
                     android:id="@+id/spinner_tukey01"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="2" />
             </LinearLayout>
 
             <Button
@@ -210,6 +247,14 @@
                 android:text="Hesapla" >
             </Button>
 
+            <TextView
+                android:id="@+id/textview_tukey01_sonuc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="@dimen/tablo_sonuc_textSize" />
             <!-- <ImageView -->
             <!-- android:layout_width="wrap_content" -->
             <!-- android:layout_height="wrap_content" -->
@@ -227,29 +272,31 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3" >
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:gravity="center"
                     android:text="V" />
 
                 <EditText
                     android:id="@+id/editTxt_tukey05"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:background="@drawable/edittext"
                     android:gravity="center"
                     android:inputType="number" />
 
                 <Spinner
                     android:id="@+id/spinner_tukey05"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="2" />
             </LinearLayout>
 
             <Button
@@ -260,6 +307,14 @@
                 android:text="Hesapla" >
             </Button>
 
+            <TextView
+                android:id="@+id/textview_tukey05_sonuc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="@dimen/tablo_sonuc_textSize" />
             <!-- <ImageView -->
             <!-- android:layout_width="wrap_content" -->
             <!-- android:layout_height="wrap_content" -->
@@ -278,29 +333,31 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3" >
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:gravity="center"
                     android:text="sd" />
 
                 <EditText
                     android:id="@+id/editTxt_spearmankorelasyon"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:background="@drawable/edittext"
                     android:gravity="center"
                     android:inputType="number" />
 
                 <Spinner
                     android:id="@+id/spinner_spearmankorelasyon"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="2" />
             </LinearLayout>
 
             <Button
@@ -311,6 +368,14 @@
                 android:text="Hesapla" >
             </Button>
 
+            <TextView
+                android:id="@+id/textview_spearman_sonuc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="@dimen/tablo_sonuc_textSize" />
             <!-- <ImageView> -->
 
 
