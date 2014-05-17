@@ -7,6 +7,7 @@ import static com.deu.deuistatistik.gcm.CommonUtilities.SENDER_ID;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -377,7 +378,6 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 			Log.v("CustomAdapter", "=====Row button clicked=====");
 		}
 
-		/********* Called when Item click in ListView ************/
 		private class OnItemClickListener implements OnClickListener {
 			private int mPosition;
 
@@ -396,16 +396,23 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 	public void onItemClick(int mPosition) {
 		Entry tempValues = (Entry) entrylistem.get(mPosition);
 
-		// SHOW ALERT
-
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		View layout = inflater.inflate(R.layout.toastcustomestat,
 				(ViewGroup) rootView.findViewById(R.id.toast_custom_layout));
 
 		WebView toast_custom_webview = (WebView) layout
 				.findViewById(R.id.toast_custom_webview);
-		toast_custom_webview.loadData(tempValues.getHtml_description(),
-				"text/html; charset=utf-8", null);
+
+		String data = tempValues.getHtml_description();
+		String content = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
+				+ "<html><head>"
+				+ "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />"
+				+ "<head><body>";
+
+		content += data + "</body></html>";
+
+		toast_custom_webview.loadData(content, "text/html; charset=utf-8",
+				"UTF-8");
 
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				getActivity());

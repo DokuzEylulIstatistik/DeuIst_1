@@ -99,8 +99,14 @@ public class MainActivity extends ActionBarActivity implements
 					.replace(R.id.container, matrisfragment).commit();
 
 		} else if (position == 6) {
-			Intent intent = new Intent(this, ActivityDagilim.class);
-			startActivity(intent);
+			Fragment_Dagilim dagilimfragment = new Fragment_Dagilim();
+			fragmentManager
+					.beginTransaction()
+					.setCustomAnimations(android.R.anim.slide_in_left,
+							android.R.anim.slide_out_right)
+					.replace(R.id.container, dagilimfragment).commit();
+			// Intent intent = new Intent(this, ActivityDagilim2.class);
+			// startActivity(intent);
 
 		}
 

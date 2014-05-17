@@ -7,6 +7,7 @@
     <string name="subtitle_duyurular">Dokuz Eylül Üniversitesi</string>
     <string name="subtitle_tablo">Tablo Değerleri</string>
     <string name="subtitle_matris">Matris</string>
+    <string name="subtitle_dagilim">Dağılımlar</string>
     <!-- SON -->
 
 
@@ -60,6 +61,44 @@
     <string name="destroyMessage">Çıkmak istediğinizden emin misiniz?</string>
     <!-- ////////////////////// -->
 
+
+    <!-- Dağılımlar -->
+    <string-array name="title_dagilimlar">
+        <item>Bernoulli Dağılımı</item>
+        <item>Binom Dağılımı</item>
+        <item>Negatif Binom Dağılımı</item>
+        <item>Poisson Dağılımı</item>
+        <item>Geometrik Dağılım</item>
+        <item>Hipergeometrik Dağılım</item>
+    </string-array>
+    <string-array name="bernoulli_input">
+        <item>p</item>
+        <item>x</item>
+    </string-array>
+    <string-array name="binom_input">
+        <item>n</item>
+        <item>p</item>
+        <item>x</item>
+    </string-array>
+    <string-array name="negatif_binom_input">
+        <item>x</item>
+        <item>p</item>
+        <item>k</item>
+    </string-array>
+    <string-array name="poisson_input">
+        <item>lamda</item>
+        <item>x</item>
+    </string-array>
+    <string-array name="geometrik_input">
+        <item>p</item>
+        <item>x</item>
+    </string-array>
+    <string-array name="hipergeometrik_input">
+        <item>N</item>
+        <item>M (başarı sayısı)</item>
+        <item>n</item>
+        <item>x</item>
+    </string-array>
 
     <!-- Matris -->
     <string name="matrisboyutuyari">Min : 2 x 2 - Max : 5 x 5</string>
@@ -659,7 +698,5 @@
         <item>3.48,0.4997</item>
         <item>3.49,0.4998</item>
     </string-array>
-
-    <string name="title_activity_activity_dagilim">ActivityDagilim</string>
 
 </resources>
