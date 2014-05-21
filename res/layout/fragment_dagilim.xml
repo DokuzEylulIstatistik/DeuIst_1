@@ -42,8 +42,8 @@
                 android:id="@+id/dagilim_sonucContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" 
-                android:visibility="gone">
+                android:orientation="vertical"
+                android:visibility="gone" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -74,6 +74,31 @@
                     <TextView
                         android:id="@+id/dagilimParametreler"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="1" >
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="5dp"
+                        android:background="@color/blue" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp" >
+
+                    <ImageView
+                        android:id="@+id/dagilim_image"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 

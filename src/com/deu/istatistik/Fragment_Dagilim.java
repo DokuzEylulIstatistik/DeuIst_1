@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
@@ -79,6 +81,7 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 
 	private void setClickListener() {
 
+		Kutuphane.hideKeyboard(activity);
 		Button btn_dagilimSecClick = (Button) rootview
 				.findViewById(R.id.btn_dagilimSec);
 		btn_dagilimSecClick.setOnClickListener(this);
@@ -86,10 +89,6 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 
 	private void btn_dagilimSecClick(View vi) {
 		int position = spinner_titleDagilimlar.getSelectedItemPosition();
-
-		LinearLayout dagilim_sonucContainer = (LinearLayout) rootview
-				.findViewById(R.id.dagilim_sonucContainer);
-		dagilim_sonucContainer.setVisibility(View.GONE);
 
 		setVisibility_sonucContainer(View.GONE);
 		getCustomAlertDialog(position);
@@ -125,7 +124,7 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 						.getStringArray(R.array.bernoulli_input);
 
 				createCustomAlertDialog(rownumber, position, bernoulli_input,
-						vi_linear);
+						vi_linear, R.drawable.bernoulli);
 
 				alert.setView(vi_linear);
 				alert.setPositiveButton("Hesapla",
@@ -170,15 +169,12 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 		case 1:
 			try {
 				final int rownumber1 = 3;
-				// int colnumber = 2;
+
 				String[] binom_input = resources
 						.getStringArray(R.array.binom_input);
 
-				// String[] static_strings1 = new String[] { DAGILIM_CONTAINER,
-				// DAGILIM_TEXT, DA };
-
 				createCustomAlertDialog(rownumber1, position, binom_input,
-						vi_linear);
+						vi_linear, R.drawable.binom);
 
 				alert.setView(vi_linear);
 
@@ -223,15 +219,13 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 		case 2:
 			try {
 				final int rownumber1 = 3;
-				// int colnumber = 2;
+
 				String[] negatif_binom_input = resources
 						.getStringArray(R.array.negatif_binom_input);
 
-				// String[] static_strings1 = new String[] { DAGILIM_CONTAINER,
-				// DAGILIM_TEXT, DA };
-
 				createCustomAlertDialog(rownumber1, position,
-						negatif_binom_input, vi_linear);
+						negatif_binom_input, vi_linear,
+						R.drawable.negatif_binom);
 
 				alert.setView(vi_linear);
 
@@ -277,12 +271,12 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 		case 3:
 			try {
 				final int rownumber = 2;
-				// int colnumber = 2;
+
 				String[] poisson_input = resources
 						.getStringArray(R.array.poisson_input);
 
 				createCustomAlertDialog(rownumber, position, poisson_input,
-						vi_linear);
+						vi_linear, R.drawable.poisson);
 
 				alert.setView(vi_linear);
 				alert.setPositiveButton("Hesapla",
@@ -328,12 +322,12 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 		case 4:
 			try {
 				final int rownumber = 2;
-				// int colnumber = 2;
+
 				String[] geometrik_input = resources
 						.getStringArray(R.array.geometrik_input);
 
 				createCustomAlertDialog(rownumber, position, geometrik_input,
-						vi_linear);
+						vi_linear, R.drawable.geometrik);
 
 				alert.setView(vi_linear);
 				alert.setPositiveButton("Hesapla",
@@ -379,12 +373,13 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 		case 5:
 			try {
 				final int rownumber = 4;
-				// int colnumber = 2;
+
 				String[] hipergeometrik_input = resources
 						.getStringArray(R.array.hipergeometrik_input);
 
 				createCustomAlertDialog(rownumber, position,
-						hipergeometrik_input, vi_linear);
+						hipergeometrik_input, vi_linear,
+						R.drawable.hipergeometrik);
 
 				alert.setView(vi_linear);
 				alert.setPositiveButton("Hesapla",
@@ -438,7 +433,7 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 	}
 
 	private void setSonucContainer(double sonuc, String dagilimTitle,
-			String dagilimParametre, String ortvar) {
+			String dagilimParametre, String ortvar, int imageID) {
 		TextView text_sonuc = (TextView) rootview
 				.findViewById(R.id.textview_dagilimSonuc);
 		String str_sonuc = new DecimalFormat("#.#####").format(sonuc);
@@ -460,17 +455,25 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 				.findViewById(R.id.textview_dagilimOrtVar);
 		textview_dagilimOrtVar.setText(ortvar);
 
+		ImageView dagilim_image = (ImageView) rootview
+				.findViewById(R.id.dagilim_image);
+		dagilim_image.setImageResource(imageID);
+
 	}
 
 	private void calcHiperGeomettik(double N, double M, double n, double x,
 			int titlePosition) {
 		try {
+			if (N < M && M < x && N < n) {
+				throw new Exception();
+			}
+
 			String[] hipergeometrik_input = resources
 					.getStringArray(R.array.hipergeometrik_input);
 			// //
-			double sonuc = Kombinasyon.Hesapla((int) M, (int) x)
-					* Kombinasyon.Hesapla((int) (N - M), (int) (n - x))
-					/ Kombinasyon.Hesapla((int) N, (int) n);
+			double sonuc = ((Kombinasyon.Hesapla((int) M, (int) x) * Kombinasyon
+					.Hesapla((int) (N - M), (int) (n - x))) / Kombinasyon
+					.Hesapla((int) N, (int) n));
 
 			String dagilimParametreler = hipergeometrik_input[0] + " : "
 					+ String.valueOf(N) + "\n" + hipergeometrik_input[1]
@@ -489,10 +492,11 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 			// //////////////////////////////////
 
 			setSonucContainer(sonuc, titles[titlePosition],
-					dagilimParametreler, ortvar);
+					dagilimParametreler, ortvar, R.drawable.hipergeometrik);
 			setVisibility_sonucContainer(View.VISIBLE);
 		} catch (Exception e) {
-
+			kutuphane.getAlertDialog(activity, "Hatalý Giriþ",
+					"N > M \n M > x \n N > n olmalýdýr.");
 		}
 
 	}
@@ -508,8 +512,8 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 					+ String.valueOf(p) + "\n" + geometrik_input[1] + " : "
 					+ String.valueOf(x);
 			// ///
-			double ortalama = 1 / p;
-			double varyans = (1 - p) / Math.pow(p, 2);
+			double ortalama = (double) (1 / p);
+			double varyans = (1 - p) / (double) Math.pow(p, 2);
 			String ortvar = "Ortalama : "
 					+ new DecimalFormat("0.#####").format(ortalama) + "\n"
 					+ "Varyans : "
@@ -517,7 +521,7 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 			// //////////////////////////////////
 
 			setSonucContainer(sonuc, titles[titlePosition],
-					dagilimParametreler, ortvar);
+					dagilimParametreler, ortvar, R.drawable.geometrik);
 			setVisibility_sonucContainer(View.VISIBLE);
 		} catch (Exception e) {
 
@@ -545,7 +549,7 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 			// //////////////////////////////////
 
 			setSonucContainer(sonuc, titles[titlePosition],
-					dagilimParametreler, ortvar);
+					dagilimParametreler, ortvar, R.drawable.poisson);
 			setVisibility_sonucContainer(View.VISIBLE);
 		} catch (Exception e) {
 
@@ -555,12 +559,17 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 	private void calcNegatifBinom(double x, double p, double k,
 			int titlePosition) {
 		try {
+
+			if (x < k) {
+				throw new Exception();
+			}
 			String[] negatif_binom_input = resources
 					.getStringArray(R.array.negatif_binom_input);
 			// //
 
 			double sonuc = Kombinasyon.Hesapla((int) (x - 1), (int) (k - 1))
 					* Math.pow(p, k) * Math.pow((1 - p), (x - k));
+
 			String dagilimParametreler = negatif_binom_input[0] + " : "
 					+ String.valueOf(x) + "\n" + negatif_binom_input[1] + " : "
 					+ String.valueOf(p) + "\n" + negatif_binom_input[2] + " : "
@@ -578,15 +587,21 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 			// /
 
 			setSonucContainer(sonuc, titles[titlePosition],
-					dagilimParametreler, ortvar);
+					dagilimParametreler, ortvar, R.drawable.negatif_binom);
 			setVisibility_sonucContainer(View.VISIBLE);
 		} catch (Exception e) {
-
+			kutuphane.getAlertDialog(activity, "Hatalý Giriþ",
+					"x > k olmalýdýr.");
 		}
 	}
 
 	private void calcBernoulli(double p, double x, int titlePosition) {
 		try {
+
+			if (x != 0 && x != 1) {
+				throw new Exception();
+			}
+
 			String[] bernoulli_input = resources
 					.getStringArray(R.array.bernoulli_input);
 			// //
@@ -604,22 +619,28 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 			// //////////////////////////////////
 
 			setSonucContainer(sonuc, titles[titlePosition],
-					dagilimParametreler, ortvar);
+					dagilimParametreler, ortvar, R.drawable.bernoulli);
 			setVisibility_sonucContainer(View.VISIBLE);
 		} catch (Exception e) {
-
+			kutuphane.getAlertDialog(activity, "Hatalý Giriþ",
+					"x = 1 veya x = 0 olmalýdýr.");
 		}
 	}
 
 	private void calcBinom(double n, double p, double x, int titlePosition) {
 
 		try {
+			if (n < x) {
+				throw new Exception();
+			}
+
 			String[] binom_input = resources
 					.getStringArray(R.array.binom_input);
 			// //
 
 			double sonuc = Kombinasyon.Hesapla((int) n, (int) x)
-					* Math.pow(p, x) * Math.pow((1 - p), (n - x));
+					* (Math.pow(p, x) * Math.pow((1 - p), (n - x)));
+
 			String dagilimParametreler = binom_input[0] + " : "
 					+ String.valueOf(n) + "\n" + binom_input[1] + " : "
 					+ String.valueOf(p) + "\n" + binom_input[2] + " : "
@@ -637,19 +658,18 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 			// /
 
 			setSonucContainer(sonuc, titles[titlePosition],
-					dagilimParametreler, ortvar);
+					dagilimParametreler, ortvar, R.drawable.binom);
 			setVisibility_sonucContainer(View.VISIBLE);
 		} catch (Exception e) {
-
+			kutuphane.getAlertDialog(activity, "Hatalý Giriþ",
+					"n > x olmalýdýr.");
 		}
-		// kutuphane
-		// .getAlertDialog(activity, String.valueOf(i), String.valueOf(j));
 	}
 
 	private LinearLayout createCustomAlertDialog(int rownumber, int position,
-			String[] input_Titles, LinearLayout vi_linear) {
+			String[] input_Titles, LinearLayout vi_linear, int imageID) {
 
-		LinearLayout[] root = new LinearLayout[rownumber];
+		LinearLayout[] root = new LinearLayout[rownumber + 1];
 		TextView[] text = new TextView[rownumber];
 		EditText[] edit = new EditText[rownumber];
 
@@ -674,7 +694,10 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 			edit[i] = (EditText) activity.getLayoutInflater().inflate(
 					R.layout.dagilim_custom_edittext, null);
 			edit[i].setTag(DAGILIM_EDIT + "_" + String.valueOf(i));
-
+			if (input_Titles[i].equals("p")) {
+				edit[i].setFilters(new InputFilter[] { new InputFilterMinMax(0,
+						1) });
+			}
 			edit[i].setLayoutParams(new LayoutParams(0,
 					LayoutParams.WRAP_CONTENT, 1f));
 
@@ -684,6 +707,17 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 
 			vi_linear.addView(root[i]);
 		}
+		// // Daðýlým Resim Ekleme
+		ImageView dagilim_image = new ImageView(activity);
+		dagilim_image.setImageResource(imageID);
+		root[rownumber] = new LinearLayout(activity);
+		root[rownumber].setTag(DAGILIM_CONTAINER + "_"
+				+ String.valueOf(rownumber));
+		root[rownumber].setWeightSum(2);
+		root[rownumber].setPadding(5, 5, 5, 5);
+		root[rownumber].addView(dagilim_image);
+		vi_linear.addView(root[rownumber]);
+		// //
 		return vi_linear;
 
 	}
@@ -703,8 +737,8 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 
 	public static class Kombinasyon {
 
-		private static int nFaktoriyel(int a) {
-			int nFakt = 1;
+		private static double nFaktoriyel(int a) {
+			double nFakt = 1;
 			for (int i = 1; i <= a; i++) {
 				nFakt = nFakt * i;
 			}
@@ -712,8 +746,8 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 			return nFakt;
 		}
 
-		public static int Hesapla(int a, int b) {
-			int sonuc;
+		public static double Hesapla(int a, int b) {
+			double sonuc;
 			sonuc = nFaktoriyel(a) / (nFaktoriyel(b) * nFaktoriyel(a - b));
 			return sonuc;
 		}

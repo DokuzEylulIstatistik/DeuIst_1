@@ -21,15 +21,27 @@ public class InputFilterMinMax implements InputFilter {
 	public CharSequence filter(CharSequence source, int start, int end,
 			Spanned dest, int dstart, int dend) {
 		try {
-			int input = Integer.parseInt(dest.toString() + source.toString());
-			if (isInRange(min, max, input))
+			if (source.toString().equals(".")) {
 				return null;
+			} else {
+				double input = Double.parseDouble(dest.toString()
+						+ source.toString());
+
+				// int input = Integer.parseInt(dest.toString()
+				// + source.toString());
+
+				if (isInRange(min, max, input))
+					return null;
+			}
 		} catch (NumberFormatException nfe) {
 		}
 		return "";
 	}
 
-	private boolean isInRange(int a, int b, int c) {
+	private boolean isInRange(int a, int b, double c) {
 		return b > a ? c >= a && c <= b : c >= b && c <= a;
 	}
+	// private boolean isInRange(int a, int b, int c) {
+	// return b > a ? c >= a && c <= b : c >= b && c <= a;
+	// }
 }

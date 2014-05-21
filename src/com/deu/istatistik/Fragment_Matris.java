@@ -136,9 +136,7 @@ public class Fragment_Matris extends Fragment implements
 		switch (selectposition) {
 		// Ýki Matrisi Topla
 		case 1:
-			// kutuphane.getAlertDialog(activity, "baslik", "mesaj");
 			getCustomAlertDialog(1);
-			//btn_islemyap.setVisibility(View.VISIBLE);
 			break;
 		case 2:
 			getCustomAlertDialog(2);
@@ -150,7 +148,6 @@ public class Fragment_Matris extends Fragment implements
 			getCustomAlertDialog(4);
 			break;
 		default:
-			//btn_islemyap.setVisibility(View.INVISIBLE);
 			break;
 		}
 

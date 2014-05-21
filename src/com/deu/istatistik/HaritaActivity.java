@@ -1,5 +1,7 @@
 package com.deu.istatistik;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -22,10 +25,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -36,7 +44,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class HaritaActivity extends FragmentActivity implements
-		LocationListener, OnMarkerClickListener {
+		LocationListener, OnMarkerClickListener, OnInfoWindowClickListener {
 
 	private LocationManager locman;
 	private GoogleMap googleHarita;
@@ -161,8 +169,55 @@ public class HaritaActivity extends FragmentActivity implements
 
 		if (googleHarita != null) {
 			googleHarita.setOnMarkerClickListener(this);
-
 			googleHarita.setMyLocationEnabled(true);
+
+			InfoWindowAdapter adap = new InfoWindowAdapter() {
+
+				@Override
+				public View getInfoWindow(Marker arg0) {
+					return null;
+				}
+
+				@Override
+				public View getInfoContents(Marker marker) {
+					View myContentView = getLayoutInflater().inflate(
+							R.layout.custommarker, null);
+					TextView tvTitle = ((TextView) myContentView
+							.findViewById(R.id.title));
+					tvTitle.setText(marker.getTitle());
+
+					ImageView image = (ImageView) myContentView
+							.findViewById(R.id.harita_konum_image);
+
+					InputStream imageUrl = null;
+					try {
+						imageUrl = getResources().getAssets().open(
+								marker.getSnippet());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					image.setImageBitmap(BitmapFactory.decodeStream(imageUrl));
+
+					// Button btn_harita_burayagit = (Button) myContentView
+					// .findViewById(R.id.btn_harita_burayagit);
+					// btn_harita_burayagit
+					// .setOnClickListener(new View.OnClickListener() {
+					//
+					// @Override
+					// public void onClick(View v) {
+					// // startNavi(marker.get)
+					// kutuphane.getAlertDialog(
+					// getApplicationContext(), "baslik",
+					// "mesaj");
+					// }
+					// });
+					return myContentView;
+				}
+			};
+
+			googleHarita.setInfoWindowAdapter(adap);
+			googleHarita.setOnInfoWindowClickListener(this);
 		}
 	}
 
@@ -208,12 +263,17 @@ public class HaritaActivity extends FragmentActivity implements
 	}
 
 	private void addMarkertoMap(LatLng latlng, BitmapDescriptor icon,
-			String title) {
+			String title, String iconAssetName) {
 
 		try {
 			LatLng Koordinat = latlng;
-			googleHarita.addMarker(new MarkerOptions().position(Koordinat)
-					.icon(icon).title(title));
+			googleHarita.addMarker(new MarkerOptions()
+					.position(Koordinat)
+					.title(title)
+					.snippet(iconAssetName)
+					.icon(BitmapDescriptorFactory
+							.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
 		} catch (Exception e) {
 			kutuphane.getAlertDialog(this, "hata", "Konum Ekleme Hatasý!");
 		}
@@ -241,9 +301,10 @@ public class HaritaActivity extends FragmentActivity implements
 					.fromAsset(pathresimler[Spinnerindis]);
 			String title = konumum.getKonumadi();
 
-			// googleHarita.addMarker(new MarkerOptions().position(latlng)
-			// .icon(icon).title(title));
-			addMarkertoMap(latlng, icon, title);
+			addMarkertoMap(latlng, icon, title, pathresimler[Spinnerindis]);
+
+			googleHarita.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng,
+					16));
 
 		} catch (Exception e) {
 		}
@@ -276,7 +337,7 @@ public class HaritaActivity extends FragmentActivity implements
 
 				// googleHarita.addMarker(new MarkerOptions().position(latlng)
 				// .icon(icon).title(title));
-				addMarkertoMap(latlng, icon, title);
+				addMarkertoMap(latlng, icon, title, pathresimler[a]);
 
 			} catch (Exception e) {
 				kutuphane.getAlertDialog(this, "Hata", "Konum Ekleme Hatasý !");
@@ -450,13 +511,13 @@ public class HaritaActivity extends FragmentActivity implements
 	public boolean onMarkerClick(Marker marker) {
 		// TODO Auto-generated method stub
 
-		String baslik = marker.getTitle();
-		LatLng latlng = marker.getPosition();
-		String position = Double.toString(latlng.latitude) + ","
-				+ Double.toString(latlng.longitude);
-		AlertDialogShow(baslik, "Yol tarifi ister misiniz ?", position);
+		// String baslik = marker.getTitle();
+		// LatLng latlng = marker.getPosition();
+		// String position = Double.toString(latlng.latitude) + ","
+		// + Double.toString(latlng.longitude);
+		// AlertDialogShow(baslik, "Yol tarifi ister misiniz ?", position);
 
-		return true;
+		return false;
 	}
 
 	private void AlertDialogShow(String title, String message,
@@ -489,6 +550,18 @@ public class HaritaActivity extends FragmentActivity implements
 		Intent intent = new Intent(Intent.ACTION_VIEW,
 				Uri.parse("google.navigation:q=" + position));
 		startActivity(intent);
+	}
+
+	@Override
+	public void onInfoWindowClick(Marker marker) {
+		// TODO Auto-generated method stub
+		LatLng latlng = marker.getPosition();
+		String position = Double.toString(latlng.latitude) + ","
+				+ Double.toString(latlng.longitude);
+
+		startNavi(position);
+		// kutuphane.getAlertDialog(this, "baslik", "mesaj");
+
 	}
 
 }

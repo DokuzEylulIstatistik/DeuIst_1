@@ -64,13 +64,11 @@ public class Fragment_Harita extends Fragment implements LocationListener,
 			Bundle savedInstanceState) {
 
 		Log.v(TAG, "onCreate View Çalýþtý");
-		
+
 		View vi = inflater.inflate(R.layout.harita, container, false);
 		rootView = vi;
 		fa = super.getActivity();
-		
-		
-		
+
 		String actionbarsunTitle = getResources().getString(
 				R.string.actionbarsubtitle);
 
@@ -192,7 +190,7 @@ public class Fragment_Harita extends Fragment implements LocationListener,
 		super.onStop();
 
 		googleHarita.stopAnimation();
-		
+
 		kutuphane.stopFlurry(getActivity());
 	}
 
@@ -243,11 +241,12 @@ public class Fragment_Harita extends Fragment implements LocationListener,
 	}
 
 	private void initHarita() {
+		// if (googleHarita == null) {
 		googleHarita = ((SupportMapFragment) getActivity()
 				.getSupportFragmentManager().findFragmentById(
 						R.id.haritafragment)).getMap();
-		googleHarita
-				.setOnMarkerClickListener(this);
+		// }
+		googleHarita.setOnMarkerClickListener(this);
 
 		googleHarita.setMyLocationEnabled(true);
 	}
@@ -299,7 +298,7 @@ public class Fragment_Harita extends Fragment implements LocationListener,
 		try {
 			LatLng Koordinat = latlng;
 			googleHarita.addMarker(new MarkerOptions().position(Koordinat)
-					.icon(icon).title(title));
+					.title(title).snippet("Nabbbeer"));
 		} catch (Exception e) {
 			kutuphane.getAlertDialog(getActivity(), "hata",
 					"Konum Ekleme Hatasý!");

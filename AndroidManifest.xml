@@ -62,7 +62,8 @@
         <activity
             android:name="com.deu.istatistik.HaritaActivity"
             android:label="Harita"
-            android:parentActivityName="com.deu.istatistik.MainActivity" >
+            android:parentActivityName="com.deu.istatistik.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.deu.istatistik.MainActivity" />
