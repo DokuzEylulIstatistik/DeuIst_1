@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.deu.istatistik"
-    android:versionCode="12"
-    android:versionName="Test_2" >
+    android:versionCode="16"
+    android:versionName="ANDRO2" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -68,7 +68,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.deu.istatistik.MainActivity" />
         </activity>
+        <!-- <activity -->
+        <!-- android:name="com.deu.istatistik.IletisimActivity" -->
+        <!-- android:label="@string/title_activity_iletisim" -->
+        <!-- android:theme="@style/Theme.AppCompat.Light" > -->
+        <!-- </activity> -->
 
+        <activity
+            android:name="com.deu.istatistik.IletisimActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_iletisim"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
         <!-- Google Maps için API anahtarı -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

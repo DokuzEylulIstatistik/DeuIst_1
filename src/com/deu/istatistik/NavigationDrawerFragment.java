@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -24,7 +23,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputBinding;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -60,9 +58,9 @@ public class NavigationDrawerFragment extends Fragment {
 	/**
 	 * Helper component that ties the action bar to the navigation drawer.
 	 */
-	private ActionBarDrawerToggle mDrawerToggle;
+	public ActionBarDrawerToggle mDrawerToggle;
 
-	private DrawerLayout mDrawerLayout;
+	public DrawerLayout mDrawerLayout;
 	private ListView mDrawerListView;
 	private View mFragmentContainerView;
 
@@ -301,6 +299,8 @@ public class NavigationDrawerFragment extends Fragment {
 			@Override
 			public void onDrawerOpened(View drawerView) {
 				super.onDrawerOpened(drawerView);
+
+				Kutuphane.hideKeyboard(getActivity());
 				if (!isAdded()) {
 					return;
 				}

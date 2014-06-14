@@ -145,6 +145,9 @@ public class MainActivity extends ActionBarActivity implements
 			// decide what to show in the action bar.
 			// getMenuInflater().inflate(R.menu.main, menu);
 			restoreActionBar();
+
+			// Kutuphane kutuphane = new Kutuphane();
+			// kutuphane.getAlertDialog(this, "baslik", "mesaj");
 			return true;
 		}
 		return super.onCreateOptionsMenu(menu);
@@ -155,10 +158,36 @@ public class MainActivity extends ActionBarActivity implements
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
+
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (id) {
+		case R.id.action_settings:
+			Kutuphane kutuphane = new Kutuphane();
+			kutuphane.getAlertDialog(this, "baslik", "mesaj");
+
 			return true;
+		case R.id.action_contact:
+			// onNavigationDrawerItemSelected(3);
+
+			mNavigationDrawerFragment.mDrawerLayout.closeDrawers();
+			mNavigationDrawerFragment.mDrawerToggle
+					.onDrawerClosed(mNavigationDrawerFragment.mDrawerLayout);
+			Fragment_Iletisim iletisimfragment = new Fragment_Iletisim();
+			getSupportFragmentManager()
+					.beginTransaction()
+					.setCustomAnimations(android.R.anim.slide_in_left,
+							android.R.anim.slide_out_right)
+					.replace(R.id.container, iletisimfragment).commit();
+			break;
+		default:
+
+			break;
 		}
+		// if (id == R.id.action_settings) {
+		// Kutuphane kutuphane = new Kutuphane();
+		// kutuphane.getAlertDialog(this, "baslik", "mesaj");
+		// return true;
+		// }
 		return super.onOptionsItemSelected(item);
 	}
 

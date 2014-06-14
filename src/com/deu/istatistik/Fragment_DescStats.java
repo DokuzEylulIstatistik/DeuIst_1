@@ -8,19 +8,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.os.ParcelableCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class Fragment_DescStats extends Fragment implements OnClickListener {
 
@@ -53,6 +56,42 @@ public class Fragment_DescStats extends Fragment implements OnClickListener {
 		rootview.setOnClickListener(this);
 		Button btn = (Button) rootview.findViewById(R.id.btn_descStatHesapla);
 		btn.setOnClickListener(this);
+
+		EditText editTextSayilar = (EditText) rootview
+				.findViewById(R.id.editTextSayilar);
+//		editTextSayilar.setOnEditorActionListener(new OnEditorActionListener() {
+//			// @Override
+//			// public boolean onEditorAction(TextView v, int actionId, KeyEvent
+//			// event) {
+//			// Log.d(TAG, "onEditorAction");
+//			// if (event != null && event.getAction() != KeyEvent.ACTION_DOWN) {
+//			// return false;
+//			// } else if (actionId == EditorInfo.IME_ACTION_SEARCH
+//			// || event == null
+//			// || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+//			//
+//			// }
+//			// return false;
+//			// }
+//
+//			@Override
+//			public boolean onEditorAction(TextView v, int actionId,
+//
+//			KeyEvent event) {
+//				boolean handled = false;
+//				if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+//
+//					KeyEvent newevent = new KeyEvent(KeyEvent.ACTION_DOWN,
+//							KeyEvent.KEYCODE_ENTER);
+//					
+//					// KeyEvent.changeAction(newevent, KeyEvent.ACTION_DOWN);
+//					// event.changeAction(newevent, KeyEvent.ACTION_DOWN);
+//
+//					handled = true;
+//				}
+//				return handled;
+//			}
+//		});
 
 		return rootview;
 	}
@@ -92,31 +131,31 @@ public class Fragment_DescStats extends Fragment implements OnClickListener {
 		double range = calcRange(sayilar);
 
 		DescriptionStats ds_range = new DescriptionStats();
-		ds_range.setStats_key("Range");
+		ds_range.setStats_key("Aralýk");
 		ds_range.setStats_val(new DecimalFormat("0.#####").format(range));
 
 		DescriptionStats ds_sum = new DescriptionStats();
-		ds_sum.setStats_key("Sum");
+		ds_sum.setStats_key("Toplam");
 		ds_sum.setStats_val(new DecimalFormat("0.#####").format(sum));
 
 		DescriptionStats ds_mean = new DescriptionStats();
-		ds_mean.setStats_key("Mean");
+		ds_mean.setStats_key("Ortalama");
 		ds_mean.setStats_val(new DecimalFormat("0.#####").format(mean));
 
 		DescriptionStats ds_min = new DescriptionStats();
-		ds_min.setStats_key("Min ");
+		ds_min.setStats_key("Minimum ");
 		ds_min.setStats_val(new DecimalFormat("0.#####").format(min));
 
 		DescriptionStats ds_max = new DescriptionStats();
-		ds_max.setStats_key("Max");
+		ds_max.setStats_key("Maksimum");
 		ds_max.setStats_val(new DecimalFormat("0.#####").format(max));
 
 		DescriptionStats ds_stdev = new DescriptionStats();
-		ds_stdev.setStats_key("StDev");
+		ds_stdev.setStats_key("Standart Sapma");
 		ds_stdev.setStats_val(new DecimalFormat("0.#####").format(stdev));
 
 		DescriptionStats ds_var = new DescriptionStats();
-		ds_var.setStats_key("Variance");
+		ds_var.setStats_key("Varyans");
 		ds_var.setStats_val(new DecimalFormat("0.#####").format(variance));
 
 		DescriptionStats ds_N = new DescriptionStats();

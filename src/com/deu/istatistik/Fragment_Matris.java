@@ -159,8 +159,9 @@ public class Fragment_Matris extends Fragment implements
 	private void getCustomAlertDialog(int position) {
 		LayoutInflater inflater = activity.getLayoutInflater();
 		AlertDialog.Builder alert = new AlertDialog.Builder(activity);
-		final Button btn_islemyap = (Button) rootview.findViewById(R.id.btn_islemyap);
-		
+		final Button btn_islemyap = (Button) rootview
+				.findViewById(R.id.btn_islemyap);
+
 		switch (position) {
 		// Matrisin Tersini Al
 		case 1:
@@ -290,7 +291,9 @@ public class Fragment_Matris extends Fragment implements
 				Double d_deger = birimmatrix[i][j];
 
 				if (Double.isInfinite(d_deger) || Double.isNaN(d_deger)) {
-					break;
+					kutuphane.getAlertDialog(activity, "Bilgilendirme",
+							"Matrisin tersi bulunmamaktadýr.");
+					return;
 				}
 				String deger = new DecimalFormat("0.#####")
 						.format(birimmatrix[i][j]);

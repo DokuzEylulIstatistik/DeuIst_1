@@ -142,22 +142,22 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 			GcmKayitIslemleri();
 		}
 
-		ImageView yenileimage = (ImageView) rootView
-				.findViewById(R.id.image_yenile);
-		yenileimage.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (kutuphane.internetErisimi(getActivity())) {
-					prgdialog = ProgressDialog.show(getActivity(),
-							"Lütfen Bekleyiniz...", "Yükleniyor.", true);
-					loadPage();
-				} else {
-					kutuphane.getAlertDialog(getActivity(), "Uyarý",
-							"Güncellemek için Lütfen internetinizi açýnýz.");
-				}
-			}
-		});
+		// ImageView yenileimage = (ImageView) rootView
+		// .findViewById(R.id.image_yenile);
+		// yenileimage.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// if (kutuphane.internetErisimi(getActivity())) {
+		// prgdialog = ProgressDialog.show(getActivity(),
+		// "Lütfen Bekleyiniz...", "Yükleniyor.", true);
+		// loadPage();
+		// } else {
+		// kutuphane.getAlertDialog(getActivity(), "Uyarý",
+		// "Güncellemek için Lütfen internetinizi açýnýz.");
+		// }
+		// }
+		// });
 
 		AcilisListviewgetRow();
 
@@ -714,10 +714,10 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 						"Güncellemek için Lütfen internetinizi açýnýz.");
 			}
 			return true;
-		case R.id.action_btnOyla:
-			// SharedPrfGoster();
-			// loadPage();
-			return true;
+			// case R.id.action_btnOyla:
+			// // SharedPrfGoster();
+			// // loadPage();
+			// return true;
 
 		case android.R.id.home:
 			// kutuphane.getAlertDialog(this, "Uyarý",
@@ -744,10 +744,10 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 						"Güncellemek için Lütfen internetinizi açýnýz.");
 			}
 			return true;
-		case R.id.action_btnOyla:
-			// SharedPrfGoster();
-			// loadPage();
-			return true;
+			// case R.id.action_btnOyla:
+			// // SharedPrfGoster();
+			// // loadPage();
+			// return true;
 
 		case android.R.id.home:
 			// kutuphane.getAlertDialog(this, "Uyarý",

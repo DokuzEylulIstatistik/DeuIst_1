@@ -6,6 +6,6 @@
     android:layout_margin="5dp"
     android:maxLines="2"
     android:textSize="14sp" 
-    android:inputType="numberDecimal">
+    android:inputType="numberDecimal|numberSigned">
 
 </EditText>

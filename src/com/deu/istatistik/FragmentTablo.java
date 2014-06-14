@@ -1,5 +1,6 @@
 package com.deu.istatistik;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -27,6 +28,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 import com.jjoe64.graphview.BarGraphView;
@@ -42,7 +44,8 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 
 	View rootview;
 	FragmentActivity activity;
-
+	public Spinner n1;
+	public Spinner n2;
 	Kutuphane kutuphane = new Kutuphane();
 
 	ArrayList<String> degerler_kikare;
@@ -50,6 +53,7 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 	ArrayList<String> degerler_tukey01;
 	ArrayList<String> degerler_tukey05;
 	ArrayList<String> degerler_spearmankorelasyon;
+	ArrayList<String> degerler_f;
 	// ////
 	Spinner spin_tukey05;
 	Spinner spin_tukey01;
@@ -150,7 +154,12 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 		actionBar.show();
 
 		SpinnerDoldur();
-
+		//
+		final Spinner f_alfa = (Spinner) rootview
+				.findViewById(R.id.spinner_f_alfa);
+		n1 = (Spinner) rootview.findViewById(R.id.f_n1);
+		n2 = (Spinner) rootview.findViewById(R.id.f_n2);
+		//
 		final String[] tablolar = getResources().getStringArray(
 				R.array.Tablolar);
 		ArrayAdapter<String> adap = new ArrayAdapter<String>(activity,
@@ -204,7 +213,120 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 							.findViewById(R.id.layout_spearmankorelasyon);
 					lyt4.setVisibility(View.VISIBLE);
 					break;
+				case 7: // f
 
+					LinearLayout lyt5 = (LinearLayout) rootview
+							.findViewById(R.id.layout_f);
+					lyt5.setVisibility(View.VISIBLE);
+
+					String stralfa[] = { "0.01", "0.025", "0.05", "0.10" };
+					final ArrayAdapter<String> arrayalfa = new ArrayAdapter<String>(
+							activity,
+							android.R.layout.simple_list_item_checked,
+							android.R.id.text1, stralfa);
+
+					f_alfa.setAdapter(arrayalfa);
+
+					f_alfa.setOnItemSelectedListener(new OnItemSelectedListener() {
+						public void onItemSelected(AdapterView<?> parent,
+								View view, int pos, long id) {
+							String[] alfadegerler;
+
+							String[] alfadegerler2 = { "Seçiniz", "1", "2",
+									"3", "4", "5", "6", "7", "8", "9", "10",
+									"11", "12", "13", "14", "15", "16", "17",
+									"18", "19", "20", "21", "22", "23", "24",
+									"25", "26", "27", "28", "29", "30", "40",
+									"60", "120", "" };
+							ArrayAdapter<String> adapp;
+							ArrayAdapter<String> adapp2;
+							switch (pos) {
+
+							// aÅŸaÄŸÄ±daki kÄ±sÄ±mlar normali ile aynÄ± sadace
+							// MainActivity.this yerine orda this yazÄ±yor.
+							case 0:
+
+								degerler_f = kutuphane.getDosya(activity,
+										"f001.txt");
+								alfadegerler = degerler_f.get(0).split(";");
+
+								adapp2 = new ArrayAdapter<String>(
+										activity,
+										android.R.layout.simple_spinner_dropdown_item,
+										alfadegerler2);
+								adapp = new ArrayAdapter<String>(
+										activity,
+										android.R.layout.simple_spinner_dropdown_item,
+										alfadegerler);
+								n1.setAdapter(adapp);
+								n2.setAdapter(adapp2);
+								break;
+
+							case 1:
+
+								degerler_f = kutuphane.getDosya(activity,
+										"f0025.txt");
+								alfadegerler = degerler_f.get(0).split(";");
+								adapp2 = new ArrayAdapter<String>(
+										activity,
+										android.R.layout.simple_spinner_dropdown_item,
+										alfadegerler2);
+								adapp = new ArrayAdapter<String>(
+										activity,
+										android.R.layout.simple_spinner_dropdown_item,
+										alfadegerler);
+								n1.setAdapter(adapp);
+								n2.setAdapter(adapp2);
+								break;
+
+							case 2:
+
+								degerler_f = kutuphane.getDosya(activity,
+										"f005.txt");
+								alfadegerler = degerler_f.get(0).split(";");
+								adapp2 = new ArrayAdapter<String>(
+										activity,
+										android.R.layout.simple_spinner_dropdown_item,
+										alfadegerler2);
+								adapp = new ArrayAdapter<String>(
+										activity,
+										android.R.layout.simple_spinner_dropdown_item,
+										alfadegerler);
+								n1.setAdapter(adapp);
+								n2.setAdapter(adapp2);
+								break;
+
+							case 3:
+
+								degerler_f = kutuphane.getDosya(activity,
+										"f010.txt");
+								alfadegerler = degerler_f.get(0).split(";");
+								adapp2 = new ArrayAdapter<String>(
+										activity,
+										android.R.layout.simple_spinner_dropdown_item,
+										alfadegerler2);
+								adapp = new ArrayAdapter<String>(
+										activity,
+										android.R.layout.simple_spinner_dropdown_item,
+										alfadegerler);
+								n1.setAdapter(adapp);
+								n2.setAdapter(adapp2);
+								break;
+
+							default:
+
+								break;
+							}
+
+						}
+
+						@Override
+						public void onNothingSelected(AdapterView<?> parent) {
+
+						}
+					});
+					// case 7 end
+					break;
 				default:
 					break;
 				}
@@ -212,7 +334,6 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -254,6 +375,12 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 
 		Button btn_kikare = (Button) rootview.findViewById(R.id.btn_kikare);
 		btn_kikare.setOnClickListener(this);
+
+		Button btn_tersz = (Button) rootview.findViewById(R.id.btn_tersz);
+		btn_tersz.setOnClickListener(this);
+
+		Button btn_f = (Button) rootview.findViewById(R.id.btn_f);
+		btn_f.setOnClickListener(this);
 
 	}
 
@@ -308,20 +435,11 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 
 				double sonuc = (y2 - y1) * (x - z1) / (z2 - z1);
 
-				if (Double.toString(sonuc + y1).length() > 6) {
-					// kutuphane.getAlertDialog(activity, "Sonuç : ", Double
-					// .toString(sonuc + y1).substring(0, 6));
 
-					textview_z_sonuc.setText("Sonuç : "
-							+ Double.toString(sonuc + y1).substring(0, 6));
 
-				} else {
-					// kutuphane.getAlertDialog(activity, "Sonuç : ",
-					// Double.toString(sonuc + y1));
-
-					textview_z_sonuc.setText("Sonuç : "
-							+ Double.toString(sonuc + y1));
-				}
+				textview_z_sonuc.setText("Sonuç : "
+						+ (new DecimalFormat("#.####").format(sonuc + y1)));
+			
 
 				GraphView graphView = new BarGraphView(activity, "");
 
@@ -412,6 +530,89 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 
 	}
 
+	public void btn_tersz_Click(View vi) {
+		try {
+			Kutuphane.hideKeyboard(activity);
+			final String[] ztablo = getResources().getStringArray(
+					R.array.ztablo);
+			double[] arama = new double[ztablo.length];
+			for (int i = 0; i < ztablo.length; i++) {
+				arama[i] = Double.parseDouble(ztablo[i].substring(
+						ztablo[i].length() - 6, ztablo[i].length()));
+			}
+
+			EditText KulGiris = (EditText) rootview
+					.findViewById(R.id.editTxt_z);
+			final double s = Double.parseDouble(KulGiris.getText().toString());
+
+			if (s <= 0.4998) {
+				int deger = zsearch(arama, s);
+
+				String mini[] = (ztablo[deger].split(","));
+				String maxi[] = (ztablo[deger + 1].split(","));
+
+				double ters = (Double.parseDouble(mini[0]) - Double
+						.parseDouble(maxi[0]))
+						* (s - Double.parseDouble(mini[1]))
+						/ (Double.parseDouble(mini[1]) - Double
+								.parseDouble(maxi[1]));
+
+				double sonuc = Double.parseDouble(mini[0]) + ters;
+				kutuphane.getAlertDialog(activity, "Sonuç : ",
+						new DecimalFormat("#.#####").format(sonuc));
+			} else {
+				Toast.makeText(activity,
+						"Girilen deðer 0 ile 0.4998 arasýnda olmalýdýr.",
+						Toast.LENGTH_LONG).show();
+			}
+		} catch (Exception e) {
+			kutuphane.getAlertDialog(activity, "Hata",
+					"Lütfen doðru giriþ yaptýðýnýzdan emin olunuz.");
+		}
+	}
+
+	public static int zsearch(double[] array, double s) {
+		// veriler sýralanmýþ olarak gelecektir.
+		int n = array.length;
+		int q1, q2, q3, q4;
+
+		q1 = n / 4;
+		q2 = n * 2 / 4;
+		q3 = n * 3 / 4;
+		q4 = n;
+		int mini = 0;
+		if (s <= array[q1]) {
+			for (int i = 0; i <= q1; i++) {
+				if (s <= array[i]) {
+					mini = i - 1;
+					break;
+				}
+			}
+		} else if (s <= array[q2]) {
+			for (int i = q1; i <= q2; i++) {
+				if (s <= array[i]) {
+					mini = i - 1;
+					break;
+				}
+			}
+		} else if (s <= array[q3]) {
+			for (int i = q2; i <= q3; i++) {
+				if (s <= array[i]) {
+					mini = i - 1;
+					break;
+				}
+			}
+		} else if (s <= array[q4 - 1]) {
+			for (int i = q3; i <= q4; i++) {
+				if (s <= array[i]) {
+					mini = i - 1;
+					break;
+				}
+			}
+		}
+		return mini;
+	}
+
 	private double StandartNormal(double x) {
 		double sonuc = 0;
 		sonuc = (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-(Math.pow(x, 2) / 2));
@@ -447,75 +648,6 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 				textview_kikare_sonuc.setText("Sonuç : " + sonuc);
 
 				// /////////////////////
-
-				// GraphView graphView = new BarGraphView(activity, "");
-				//
-				// GraphViewSeriesStyle seriesStyle = new
-				// GraphViewSeriesStyle();
-				//
-				// seriesStyle.setValueDependentColor(new ValueDependentColor()
-				// {
-				// @Override
-				// public int get(GraphViewDataInterface data) {
-				// // the higher the more red
-				//
-				// if (data.getX() >= 0 && data.getX() < deger_int) {
-				// return getResources().getColor(R.color.z_icalan);
-				// } else {
-				// return getResources().getColor(R.color.z_disalan);
-				// }
-				//
-				// }
-				// });
-				// GraphViewDataInterface[] dat = new GraphViewDataInterface[] {
-				// new GraphViewData(
-				// 0, 0) };
-				// GraphViewSeries exampleSeries = new GraphViewSeries("Tablo",
-				// seriesStyle, dat);
-				// int countNumber = 60;
-				// double number = -4;
-				// for (int i = 0; i < countNumber; i++) {
-				//
-				// GraphViewData dt = new GraphViewData(number, Math.pow(
-				// StandartNormal(number), 2));
-				// exampleSeries.appendData(dt, true, countNumber);
-				//
-				// double q = (countNumber / 8);
-				// q = (1 / q);
-				//
-				// number += q;
-				//
-				// }
-				//
-				// // graphView.setBackground(getResources().getDrawable(
-				// // R.drawable.edittext));
-				// // graphView.setScalable(true);
-				// // graphView.setScrollable(true);
-				// graphView.setHorizontalLabels(new String[] { "" });
-				// graphView.setVerticalLabels(new String[] { "" });
-				// graphView.addSeries(exampleSeries);
-				// // graphView.setDrawingCacheBackgroundColor(Color.BLACK);
-				//
-				// // GraphViewSeriesStyle sdf = new GraphViewSeriesStyle();
-				//
-				// // graphView.setHorizontalLabels(new String[] { "2 days ago",
-				// // / "yesterday", "today", "tomorrow" });
-				// // graphView.setVerticalLabels(new String[] { "high",
-				// "middle",
-				// // "low" });
-				// // graphView.getGraphViewStyle().setGridColor(Color.GREEN);
-				// // graphView.getGraphViewStyle().setHorizontalLabelsColor(
-				// // Color.YELLOW);
-				// //
-				// graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
-				// graphView.getGraphViewStyle().setTextSize(14);
-				// // getResources().getDimension(R.dimen.big));
-				// // graphView.getGraphViewStyle().setNumHorizontalLabels(5);
-				// // graphView.getGraphViewStyle().setNumVerticalLabels(4);
-				// // graphView.getGraphViewStyle().setVerticalLabelsWidth(300);
-				// // data
-				//
-				// layout.addView(graphView);
 
 			} else {
 				kutuphane.getAlertDialog(activity, "Aralýk Hatasý",
@@ -667,6 +799,26 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 
 	}
 
+	public void btn_f_Click(View vi) {
+		try {
+			// LinearLayout layout = (LinearLayout) findViewById(R.id.layout_f);
+
+			// Spinner n2spinner = (Spinner) findViewById(R.id.f_n2);
+			// Spinner n1spinner=(Spinner) findViewById(R.id.f_n1);
+
+			int deger = n2.getSelectedItemPosition();
+			String[] satir = degerler_f.get(deger).split(";");
+			int sutun = n1.getSelectedItemPosition();
+			String sonuc = satir[sutun];
+			kutuphane.getAlertDialog(activity, "Sonuç", sonuc);
+
+		} catch (Exception e) {
+			kutuphane.getAlertDialog(activity, "Hata !",
+					"Lütfen Deðerleri kontrol ediniz.");
+		}
+
+	}
+
 	private ActionBar getActionBar() {
 		return ((ActionBarActivity) getActivity()).getSupportActionBar();
 	}
@@ -746,10 +898,15 @@ public class FragmentTablo extends Fragment implements AnimationListener,
 		case R.id.btn_tukey05:
 			btn_tukey05_Click(v);
 			break;
+		case R.id.btn_tersz:
+			btn_tersz_Click(v);
+			break;
+		case R.id.btn_f:
+			btn_f_Click(v);
+			break;
 		default:
 			break;
 		}
 
 	}
-
 }

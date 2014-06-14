@@ -60,7 +60,7 @@ public final class R {
         public static final int sinif4donem1=0x7f0c0014;
         public static final int sinif4donem2=0x7f0c0015;
         public static final int siniflar=0x7f0c0017;
-        /**  ////////////////////// 
+        /**  //// 
  Dağılımlar 
          */
         public static final int title_dagilimlar=0x7f0c0002;
@@ -583,6 +583,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
          */
         public static final int mapType=0x7f010002;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int metaButtonBarButtonStyle=0x7f01007f;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int metaButtonBarStyle=0x7f01007e;
         /**  The type of navigation to use. 
          <p>Must be one of the following constant values.</p>
 <table>
@@ -1354,8 +1362,8 @@ containing a value of this type.
     }
     public static final class id {
         public static final int ListView_dsc_stat_description=0x7f060046;
-        public static final int Outlier=0x7f0600a3;
-        public static final int Regresyon=0x7f0600a2;
+        public static final int Outlier=0x7f0600b0;
+        public static final int Regresyon=0x7f0600af;
         public static final int acilis_txtBaslik=0x7f06003f;
         public static final int acilis_txtYazi=0x7f060040;
         public static final int action_bar=0x7f06001f;
@@ -1365,95 +1373,107 @@ containing a value of this type.
         public static final int action_bar_root=0x7f06001d;
         public static final int action_bar_subtitle=0x7f060026;
         public static final int action_bar_title=0x7f060025;
-        public static final int action_btnOyla=0x7f0600a1;
+        public static final int action_contact=0x7f0600ad;
         public static final int action_context_bar=0x7f060020;
         public static final int action_menu_divider=0x7f060019;
         public static final int action_menu_presenter=0x7f06001a;
         public static final int action_mode_close_button=0x7f060027;
-        public static final int action_settings=0x7f06009e;
-        public static final int action_yenile=0x7f0600a0;
+        public static final int action_settings=0x7f0600ab;
+        public static final int action_yenile=0x7f0600ae;
         public static final int activity_chooser_view_content=0x7f060028;
+        public static final int alfatext=0x7f0600a1;
         public static final int always=0x7f06000f;
         public static final int beginning=0x7f060014;
-        public static final int btn_dagilimSec=0x7f06005d;
+        public static final int btn_dagilimSec=0x7f06005c;
         public static final int btn_descStatHesapla=0x7f060045;
-        public static final int btn_hesapla=0x7f060073;
-        public static final int btn_hesapla_diger=0x7f060076;
-        public static final int btn_islemSec=0x7f06006c;
-        public static final int btn_islemyap=0x7f06006e;
-        public static final int btn_kikare=0x7f060086;
-        public static final int btn_spearmankorelasyon=0x7f06009a;
-        public static final int btn_student_t=0x7f06008b;
-        public static final int btn_tukey01=0x7f060090;
-        public static final int btn_tukey05=0x7f060095;
-        public static final int btn_z=0x7f060080;
+        public static final int btn_f=0x7f0600a7;
+        public static final int btn_hesapla=0x7f060076;
+        public static final int btn_hesapla_diger=0x7f060079;
+        public static final int btn_iletisim_Gonder=0x7f060068;
+        public static final int btn_islemSec=0x7f06006f;
+        public static final int btn_islemyap=0x7f060071;
+        public static final int btn_kikare=0x7f06008a;
+        public static final int btn_spearmankorelasyon=0x7f06009e;
+        public static final int btn_student_t=0x7f06008f;
+        public static final int btn_tersz=0x7f060084;
+        public static final int btn_tukey01=0x7f060094;
+        public static final int btn_tukey05=0x7f060099;
+        public static final int btn_z=0x7f060083;
         public static final int checkbox=0x7f060030;
         public static final int collapseActionView=0x7f060011;
         public static final int container=0x7f060049;
         public static final int customview_alertmatrislayout_root=0x7f06004d;
-        public static final int dagilimBaslik=0x7f06005f;
-        public static final int dagilimParametreler=0x7f060060;
-        public static final int dagilim_image=0x7f060061;
-        public static final int dagilim_sonucContainer=0x7f06005e;
+        public static final int dagilimBaslik=0x7f06005e;
+        public static final int dagilimParametreler=0x7f06005f;
+        public static final int dagilim_image=0x7f060060;
+        public static final int dagilim_sonucContainer=0x7f06005d;
         public static final int default_activity_button=0x7f06002b;
         public static final int ders_adi=0x7f060055;
-        public static final int desc_stat_menu_Regresyon=0x7f06009f;
+        public static final int desc_stat_menu_Regresyon=0x7f0600ac;
         public static final int dialog=0x7f060012;
-        public static final int diger=0x7f060075;
+        public static final int diger=0x7f060078;
         public static final int disableHome=0x7f06000c;
         public static final int drawer_layout=0x7f060048;
         public static final int dropdown=0x7f060013;
         public static final int editTextSayilar=0x7f060043;
-        public static final int editTxt_kikare_sd=0x7f060084;
-        public static final int editTxt_spearmankorelasyon=0x7f060098;
-        public static final int editTxt_studentSd=0x7f060089;
-        public static final int editTxt_tukey01=0x7f06008e;
-        public static final int editTxt_tukey05=0x7f060093;
-        public static final int editTxt_z=0x7f06007f;
+        public static final int editTxt_kikare_sd=0x7f060088;
+        public static final int editTxt_spearmankorelasyon=0x7f06009c;
+        public static final int editTxt_studentSd=0x7f06008d;
+        public static final int editTxt_tukey01=0x7f060092;
+        public static final int editTxt_tukey05=0x7f060097;
+        public static final int editTxt_z=0x7f060082;
         public static final int edit_query=0x7f060033;
         public static final int edittext_satir=0x7f06004f;
         public static final int edittext_sutun=0x7f060051;
+        public static final int edttxt_iletisim_adsoyad=0x7f060065;
+        public static final int edttxt_iletisim_eposta=0x7f060066;
+        public static final int edttxt_iletisim_mesaj=0x7f060067;
         public static final int end=0x7f060016;
         public static final int expand_activities_button=0x7f060029;
         public static final int expanded_menu=0x7f06002f;
+        public static final int f_n1=0x7f0600a4;
+        public static final int f_n2=0x7f0600a6;
         public static final int harita_konum_image=0x7f06004b;
-        public static final int harita_menuitem_back=0x7f0600a4;
-        public static final int harita_spinnerYerListesi=0x7f060069;
-        public static final int haritafragment=0x7f060068;
+        public static final int harita_menuitem_back=0x7f0600b1;
+        public static final int harita_spinnerYerListesi=0x7f06006c;
+        public static final int haritafragment=0x7f06006b;
         public static final int home=0x7f060017;
         public static final int homeAsUp=0x7f060009;
         public static final int hybrid=0x7f060004;
         public static final int icon=0x7f06002d;
         public static final int ifRoom=0x7f06000e;
         public static final int image=0x7f06002a;
-        public static final int image_yenile=0x7f060066;
-        public static final int istatistik=0x7f060071;
+        public static final int imageView1=0x7f060064;
+        public static final int istatistik=0x7f060074;
         public static final int kredi=0x7f060056;
         public static final int layout=0x7f060052;
-        public static final int layoutTablolar=0x7f06007d;
-        public static final int layout_kikare=0x7f060083;
-        public static final int layout_matris_root=0x7f06006a;
-        public static final int layout_spearmankorelasyon=0x7f060097;
-        public static final int layout_student_t=0x7f060088;
-        public static final int layout_tukey01=0x7f06008d;
-        public static final int layout_tukey05=0x7f060092;
-        public static final int layout_z=0x7f06007e;
-        public static final int lblMessage=0x7f060078;
-        public static final int linearlayout_Acilis=0x7f060065;
-        public static final int linearlayout_matrisContainer=0x7f06006d;
+        public static final int layoutTablolar=0x7f060080;
+        public static final int layout_f=0x7f0600a0;
+        public static final int layout_kikare=0x7f060087;
+        public static final int layout_matris_root=0x7f06006d;
+        public static final int layout_spearmankorelasyon=0x7f06009b;
+        public static final int layout_student_t=0x7f06008c;
+        public static final int layout_tukey01=0x7f060091;
+        public static final int layout_tukey05=0x7f060096;
+        public static final int layout_z=0x7f060081;
+        public static final int lblMessage=0x7f06007b;
+        public static final int linearlayout_Acilis=0x7f060069;
+        public static final int linearlayout_matrisContainer=0x7f060070;
         public static final int listMode=0x7f060005;
-        public static final int listViewdiger=0x7f060077;
-        public static final int listViewistatistik=0x7f060074;
+        public static final int listViewdiger=0x7f06007a;
+        public static final int listViewistatistik=0x7f060077;
         public static final int list_item=0x7f06002c;
-        public static final int listview_Acilis=0x7f060067;
-        public static final int matris_sonucContainer=0x7f06006f;
-        public static final int menuitem=0x7f0600a5;
+        public static final int listview_Acilis=0x7f06006a;
+        public static final int matris_sonucContainer=0x7f060072;
+        public static final int menuitem=0x7f0600b2;
         public static final int middle=0x7f060015;
+        public static final int n1text=0x7f0600a3;
+        public static final int n2text=0x7f0600a5;
         public static final int navigation_drawer=0x7f06004a;
         public static final int never=0x7f06000d;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
-        public static final int ortvarTitle=0x7f060063;
+        public static final int ortvarTitle=0x7f060062;
         public static final int progress_circular=0x7f06001b;
         public static final int progress_horizontal=0x7f06001c;
         public static final int radio=0x7f060032;
@@ -1469,29 +1489,30 @@ containing a value of this type.
         public static final int search_plate=0x7f060039;
         public static final int search_src_text=0x7f06003a;
         public static final int search_voice_btn=0x7f06003e;
-        public static final int section_label=0x7f06005b;
         public static final int shortcut=0x7f060031;
         public static final int showCustom=0x7f06000b;
         public static final int showHome=0x7f060008;
         public static final int showTitle=0x7f06000a;
-        public static final int sinifsecim=0x7f060072;
+        public static final int sinifsecim=0x7f060075;
         public static final int snippet=0x7f06004c;
-        public static final int solmenu_icon=0x7f060079;
-        public static final int solmenu_title=0x7f06007a;
-        public static final int spinnerTablolar=0x7f06007c;
-        public static final int spinner_islemlist=0x7f06006b;
-        public static final int spinner_kikare_alfa=0x7f060085;
+        public static final int solmenu_icon=0x7f06007c;
+        public static final int solmenu_title=0x7f06007d;
+        public static final int sonuc=0x7f0600a8;
+        public static final int spinnerTablolar=0x7f06007f;
+        public static final int spinner_f_alfa=0x7f0600a2;
+        public static final int spinner_islemlist=0x7f06006e;
+        public static final int spinner_kikare_alfa=0x7f060089;
         public static final int spinner_notlar=0x7f060057;
-        public static final int spinner_spearmankorelasyon=0x7f060099;
-        public static final int spinner_student_alfa=0x7f06008a;
-        public static final int spinner_titleDagilimlar=0x7f06005c;
-        public static final int spinner_tukey01=0x7f06008f;
-        public static final int spinner_tukey05=0x7f060094;
-        public static final int spinnerharfnot=0x7f06007b;
+        public static final int spinner_spearmankorelasyon=0x7f06009d;
+        public static final int spinner_student_alfa=0x7f06008e;
+        public static final int spinner_titleDagilimlar=0x7f06005b;
+        public static final int spinner_tukey01=0x7f060093;
+        public static final int spinner_tukey05=0x7f060098;
+        public static final int spinnerharfnot=0x7f06007e;
         public static final int split_action_bar=0x7f060021;
         public static final int submit_area=0x7f06003c;
         public static final int tabMode=0x7f060006;
-        public static final int tabhost=0x7f060070;
+        public static final int tabhost=0x7f060073;
         public static final int terrain=0x7f060003;
         public static final int text=0x7f060053;
         public static final int text1=0x7f060054;
@@ -1501,23 +1522,23 @@ containing a value of this type.
         public static final int textView_descstatlayout_content=0x7f06005a;
         public static final int textView_descstatlayout_title=0x7f060059;
         public static final int textViewdescAciklama=0x7f060044;
-        public static final int textview_dagilimOrtVar=0x7f060064;
-        public static final int textview_dagilimSonuc=0x7f060062;
-        public static final int textview_kikare_sonuc=0x7f060087;
-        public static final int textview_spearman_sonuc=0x7f06009b;
-        public static final int textview_student_T_sonuc=0x7f06008c;
-        public static final int textview_tukey01_sonuc=0x7f060091;
-        public static final int textview_tukey05_sonuc=0x7f060096;
-        public static final int textview_z_sonuc=0x7f060081;
+        public static final int textview_dagilimOrtVar=0x7f060063;
+        public static final int textview_dagilimSonuc=0x7f060061;
+        public static final int textview_kikare_sonuc=0x7f06008b;
+        public static final int textview_spearman_sonuc=0x7f06009f;
+        public static final int textview_student_T_sonuc=0x7f060090;
+        public static final int textview_tukey01_sonuc=0x7f060095;
+        public static final int textview_tukey05_sonuc=0x7f06009a;
+        public static final int textview_z_sonuc=0x7f060085;
         public static final int title=0x7f06002e;
-        public static final int toast_custom_layout=0x7f06009c;
-        public static final int toast_custom_webview=0x7f06009d;
+        public static final int toast_custom_layout=0x7f0600a9;
+        public static final int toast_custom_webview=0x7f0600aa;
         public static final int top_action_bar=0x7f060023;
         public static final int up=0x7f060024;
         public static final int useLogo=0x7f060007;
         public static final int view1=0x7f060041;
         public static final int view2=0x7f060047;
-        public static final int view_tabloresimalan=0x7f060082;
+        public static final int view_tabloresimalan=0x7f060086;
         public static final int withText=0x7f060010;
     }
     public static final class integer {
@@ -1584,8 +1605,8 @@ containing a value of this type.
         public static final int dagilim_customtextview=0x7f03001f;
         public static final int derssatir=0x7f030020;
         public static final int descstatlayout=0x7f030021;
-        public static final int fragment_activity_dagilim2=0x7f030022;
-        public static final int fragment_dagilim=0x7f030023;
+        public static final int fragment_dagilim=0x7f030022;
+        public static final int fragment_iletisim=0x7f030023;
         public static final int fragment_main=0x7f030024;
         public static final int fragment_navigation_drawer=0x7f030025;
         public static final int harita=0x7f030026;
@@ -1607,11 +1628,12 @@ containing a value of this type.
         public static final int activity_dagilim2=0x7f0d0002;
         public static final int desc_stat_menu=0x7f0d0003;
         public static final int global=0x7f0d0004;
-        public static final int main=0x7f0d0005;
-        public static final int menudescriptivestats=0x7f0d0006;
-        public static final int menuharita=0x7f0d0007;
-        public static final int menuortalama=0x7f0d0008;
-        public static final int menutablo=0x7f0d0009;
+        public static final int iletisim=0x7f0d0005;
+        public static final int main=0x7f0d0006;
+        public static final int menudescriptivestats=0x7f0d0007;
+        public static final int menuharita=0x7f0d0008;
+        public static final int menuortalama=0x7f0d0009;
+        public static final int menutablo=0x7f0d000a;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1657,7 +1679,7 @@ containing a value of this type.
         public static final int action_example=0x7f070032;
         public static final int action_settings=0x7f070033;
         public static final int actionbarsubtitle=0x7f07003e;
-        public static final int already_registered=0x7f07004e;
+        public static final int already_registered=0x7f070050;
         public static final int app_name=0x7f070035;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
@@ -1753,49 +1775,54 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f070013;
-        public static final int connection_error=0x7f070049;
-        public static final int desc_aciklama=0x7f070042;
+        public static final int connection_error=0x7f07004b;
+        public static final int desc_aciklama=0x7f070044;
         public static final int destroyMessage=0x7f07003f;
-        public static final int dummy_button=0x7f070060;
-        public static final int dummy_content=0x7f070061;
+        public static final int dummy_button=0x7f070062;
+        public static final int dummy_content=0x7f070063;
         public static final int duyuru=0x7f07003b;
-        public static final int error_config=0x7f07004d;
-        public static final int gcm_deleted=0x7f070054;
-        public static final int gcm_error=0x7f070052;
-        public static final int gcm_message=0x7f070051;
-        public static final int gcm_recoverable_error=0x7f070053;
-        public static final int gcm_registered=0x7f07004f;
-        public static final int gcm_unregistered=0x7f070050;
+        public static final int error_config=0x7f07004f;
+        public static final int gcm_deleted=0x7f070056;
+        public static final int gcm_error=0x7f070054;
+        public static final int gcm_message=0x7f070053;
+        public static final int gcm_recoverable_error=0x7f070055;
+        public static final int gcm_registered=0x7f070051;
+        public static final int gcm_unregistered=0x7f070052;
         public static final int harita=0x7f070039;
         /**  ///////////////////////////////// 
  Harita Activity 
          */
-        public static final int haritaSpinnerFirst=0x7f07005e;
+        public static final int haritaSpinnerFirst=0x7f070060;
+        public static final int iletisim_aciklama=0x7f070041;
+        /**  ////////////////////// 
+ İletişim 
+         */
+        public static final int iletisim_title=0x7f070040;
         public static final int jsonUrl=0x7f07003d;
-        public static final int lost_connection=0x7f070047;
+        public static final int lost_connection=0x7f070049;
         /**  Matris 
          */
-        public static final int matrisboyutuyari=0x7f070040;
-        public static final int menu_outlier=0x7f070044;
-        public static final int menu_regresyon=0x7f070043;
-        public static final int menu_settings=0x7f07004b;
+        public static final int matrisboyutuyari=0x7f070042;
+        public static final int menu_outlier=0x7f070046;
+        public static final int menu_regresyon=0x7f070045;
+        public static final int menu_settings=0x7f07004d;
         public static final int navigation_drawer_close=0x7f070031;
         public static final int navigation_drawer_open=0x7f070030;
         public static final int notification_mainTitle=0x7f07003c;
-        public static final int options_clear=0x7f07005c;
-        public static final int options_exit=0x7f07005d;
-        public static final int options_register=0x7f07005a;
-        public static final int options_unregister=0x7f07005b;
+        public static final int options_clear=0x7f07005e;
+        public static final int options_exit=0x7f07005f;
+        public static final int options_register=0x7f07005c;
+        public static final int options_unregister=0x7f07005d;
         public static final int ort_hesaplama=0x7f070038;
         public static final int ozlu_soz=0x7f070036;
         /**  NetworkActivity 
          */
-        public static final int page_title=0x7f070045;
-        public static final int server_register_error=0x7f070058;
-        public static final int server_registered=0x7f070056;
-        public static final int server_registering=0x7f070055;
-        public static final int server_unregister_error=0x7f070059;
-        public static final int server_unregistered=0x7f070057;
+        public static final int page_title=0x7f070047;
+        public static final int server_register_error=0x7f07005a;
+        public static final int server_registered=0x7f070058;
+        public static final int server_registering=0x7f070057;
+        public static final int server_unregister_error=0x7f07005b;
+        public static final int server_unregistered=0x7f070059;
         public static final int sol_menu_baslik=0x7f070037;
         public static final int subtitle_dagilim=0x7f07002c;
         public static final int subtitle_desc_stat=0x7f070028;
@@ -1808,12 +1835,12 @@ containing a value of this type.
         public static final int tablo=0x7f07003a;
         /**  İletişim Activity 
          */
-        public static final int title_activity_iletisim=0x7f07005f;
-        public static final int title_activity_main=0x7f07004c;
+        public static final int title_activity_iletisim=0x7f070061;
+        public static final int title_activity_main=0x7f07004e;
         public static final int title_activity_sayfa1=0x7f070034;
         /**  Descriptive Statistics 
          */
-        public static final int title_descriptionstats=0x7f070041;
+        public static final int title_descriptionstats=0x7f070043;
         /**  SON 
  ///////// 
  <string name="app_name">DeuIsts_1</string> 
@@ -1821,14 +1848,15 @@ containing a value of this type.
         public static final int title_section1=0x7f07002d;
         public static final int title_section2=0x7f07002e;
         public static final int title_section3=0x7f07002f;
-        public static final int updated=0x7f070046;
-        public static final int wifi_connected=0x7f070048;
-        public static final int xml_error=0x7f07004a;
+        public static final int updated=0x7f070048;
+        public static final int wifi_connected=0x7f07004a;
+        public static final int xml_error=0x7f07004c;
     }
     public static final class style {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
 
     
 
@@ -1836,10 +1864,12 @@ containing a value of this type.
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
 
+
         
 
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
+
     
  API 11 theme customizations can go here. 
 
@@ -1854,6 +1884,10 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b0094;
+        public static final int ButtonBar=0x7f0b0096;
+        public static final int ButtonBarButton=0x7f0b0097;
+        public static final int FullscreenActionBarStyle=0x7f0b0098;
+        public static final int FullscreenTheme=0x7f0b0095;
         public static final int NotificationTitle=0x7f0b008b;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
@@ -2805,6 +2839,46 @@ containing a value of this type.
           @attr name com.deu.istatistik:adUnitId
         */
         public static final int AdsAttrs_adUnitId = 1;
+        /** 
+         Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels.
+    
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ButtonBarContainerTheme_metaButtonBarButtonStyle com.deu.istatistik:metaButtonBarButtonStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ButtonBarContainerTheme_metaButtonBarStyle com.deu.istatistik:metaButtonBarStyle}</code></td><td></td></tr>
+           </table>
+           @see #ButtonBarContainerTheme_metaButtonBarButtonStyle
+           @see #ButtonBarContainerTheme_metaButtonBarStyle
+         */
+        public static final int[] ButtonBarContainerTheme = {
+            0x7f01007e, 0x7f01007f
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.deu.istatistik.R.attr#metaButtonBarButtonStyle}
+          attribute's value can be found in the {@link #ButtonBarContainerTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.deu.istatistik:metaButtonBarButtonStyle
+        */
+        public static final int ButtonBarContainerTheme_metaButtonBarButtonStyle = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.deu.istatistik.R.attr#metaButtonBarStyle}
+          attribute's value can be found in the {@link #ButtonBarContainerTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.deu.istatistik:metaButtonBarStyle
+        */
+        public static final int ButtonBarContainerTheme_metaButtonBarStyle = 0;
         /** Attributes that can be used with a CompatTextView.
            <p>Includes the following attributes:</p>
            <table>

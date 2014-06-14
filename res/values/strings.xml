@@ -3,7 +3,7 @@
 
     <!-- ActionBar Subtitle -->
     <string name="subtitle_orthes">Genel Not Ortalaması</string>
-    <string name="subtitle_desc_stat">Tanımlayıcı İstatistik</string>
+    <string name="subtitle_desc_stat">Tanımlayıcı İstatistikler</string>
     <string name="subtitle_duyurular">Dokuz Eylül Üniversitesi</string>
     <string name="subtitle_tablo">Tablo Değerleri</string>
     <string name="subtitle_matris">Matris</string>
@@ -19,7 +19,7 @@
         <item>Duyurular</item>
         <item>Genel Not Ortalaması</item>
         <item>Harita</item>
-        <item>Tanımlayıcı İstatistik</item>
+        <item>Tanımlayıcı İstatistikler</item>
         <item>Tablo Değerleri</item>
         <item>Matris</item>
         <item>Dağılımlar</item>
@@ -62,6 +62,14 @@
     <!-- ////////////////////// -->
 
 
+    <!-- İletişim -->
+    <string name="iletisim_title">Geliştirmemize yardımcı olmanızdan memnuniyet duyarız.</string>
+    <string name="iletisim_aciklama">\n
+        Uygulamamız hakkındaki görüşleriniz bizim için değerli. 
+        Uygulamamızda görmek istediğiniz ek özellikler varsa bize bildirmeniz yeterlidir.\n\n
+        Teşekkür ederiz. \n</string>
+
+    <!-- //// -->
     <!-- Dağılımlar -->
     <string-array name="title_dagilimlar">
         <item>Bernoulli Dağılımı</item>
@@ -124,7 +132,7 @@
     </string-array>
 
     <!-- Descriptive Statistics -->
-    <string name="title_descriptionstats">Tanımlayıcı İstatistik</string>
+    <string name="title_descriptionstats">Tanımlayıcı İstatistikler</string>
     <string name="desc_aciklama">Lütfen her satıra bir sayi gelecek şekilde giriş yapınız.</string>
     <string name="menu_regresyon">Regresyon</string>
     <string name="menu_outlier">Uç değerler</string>
@@ -162,39 +170,70 @@
     <string name="haritaSpinnerFirst">Nereye Gitmek İstersin ?</string>
     <!-- <item>Yer İsmi,latitude+longitude</item> -->
     <string-array name="konumlar">
-        <item> Eshot Araçlari Son Durak , 38.376176+ 27.191918</item>
-        <item> Yerleşke Araçlari Son Durak, 38.368572+ 27.211079</item>
-        <item> Mimarlik Fakültesi , 38.368774+ 27.207711</item>
-        <item> Fen Edebiyat Fakültesi, 38.366598+ 27.201925</item>
-        <item> Fen Bilimleri Enstitusu, 38.371584+ 27.198891</item>
-        <item> Deu Sosyal Tesisleri, 38.371146+ 27.204470</item>
-        <item> Özel Deu 75.Yil İlkogretim Okulu, 38.373838+ 27.197025</item>
-        <item> Sağlik Tesisi(Mediko), 38.371109+ 27.203142</item>
-        <item> Merkez Kütüphane, 38.371088+ 27.202463</item>
-        <item> Deu Spor Salonu , 38.371567+ 27.200908</item>
-        <item> İşletme Fakültesi , 38.367819+ 27.201583</item>
-        <item> Sosyal Bilimler Enstitusu, 38.369283+ 27.202259</item>
-        <item> Muhendislik Bolumu, 38.368160+ 27.210496</item>
-        <item> Jeofizik Muhendisligi, 38.369368+ 27.209239</item>
-        <item> Dokuz Çeşmeler Kampüsü,38.384634+27.180361</item>
+        <item>Amfi Tiyatro,38.370345+27.203822</item>
+        <item>Atletizm ve Futbol Pisti,38.370761+27.200945</item>
+        <item>Bilgisayar Mühendisliği,38.369061+ 27.209728</item>
+        <item>Buca Eğitim Fakültesi,38.386292+27.170501</item>
+        <item>Çevre-İnşaat Mühendisliği,38.368368+27.209921</item>
+        <item>Deniz Bilimleri ve Teknoloji Enstitüsü,38.409391+27.043640</item>
+        <item>DEÜ Rektörlük,38.430844+27.136579</item>
+        <item>Edebiyat Fakültesi, 38.366599+ 27.201927</item>
+        <item>Elektrik Elektronik Mühendisliği,38.369506+27.208452</item>
+        <item>Endüstri Mühendisliği,38.370009+27.206515</item>
+        <item>Fen Bilimleri Enstitüsü,38.371584+27.198891</item>
+        <item>Fen Fakültesi,38.366599+27.201927</item>
+        <item>Fizik Tedavi ve Rehabilitasyon YO, 38.395778+27.036442</item>
+        <item>Güzel Sanatlar Fakültesi,38.398232+27.034192</item>
+        <item>Hemşirelik Fakültesi,38.395011+ 27.032910</item>
+        <item>Hukuk Fakültesi,38.385041+27.180251</item>
+        <item>İktisadi ve İdari Bilimler Fakültesi,38.385328+27.181265</item>
+        <item>İlahiyat Fakültesi,38.395488+27.095667</item>
+        <item>İşletme Fakültesi,38.368510+27.200900</item>
+        <item>Jeofizik-Jeoloji Mühendisliği,38.369259+27.209218</item>
+        <item>Maden Mühendisliği,38.369061+ 27.209728</item>
+        <item>Mediko,38.371109+27.203142</item>
+        <item>Merkez Kütüphane,38.370965+27.202233</item>
+        <item>Mimarlık Fakültesi,38.368935+27.207935</item>
+        <item>Öğretim Görevlileri Binası,38.368076+27.203440</item>
+        <item>Sosyal Tesisler,38.371146+27.204470</item>
+        <item>Spor Salonu,38.371567+27.200908</item>
+        <item>Tınaztepe Yerleşkesi Giriş,38.375838+27.193415</item>
+        <item>Tıp Fakültesi,38.394245+27.033362</item>
+        <item>Yabancı Diller Yüksek Okulu,38.386235+27.180138</item>
     </string-array>
     <string-array name="konumlar_resimler">
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
-        <item>pdo__.jpg</item>
+        <item>amfi_tiyatro.JPG</item>
+        <item>atletizm_futbol_pisti.jpg</item>
+        <item>bilgisayar_muhendisligi.jpg</item>
+        <item>buca_egitim_fakultesi.jpg</item>
+        <item>cevre_insaat_muhendisligi.JPG</item>
+        <item>deniz_bilimleri_enstitusu.jpg</item>
+        <item>deu_rektorluk.jpg</item>
+        <item>edebiyat_fakultesi.png</item>
+        <item>elektrik_elektronik_muhendisligi.jpg</item>
+        <item>endustri_muhendisligi.jpg</item>
+        <item>fen_bilimleri_enstitusu.JPG</item>
+        <item>fen_fakultesi.png</item>
+        <item>fizik_tedavi_yo.jpg</item>
+        <item>guzel_sanatlar_fakultesi.jpg</item>
+        <item>hemsirelik_fakultesi.jpg</item>
+        <item>hukuk_fakultesi.jpg</item>
+        <item>iktisadi_idari_fakultesi.jpg</item>
+        <item>ilahiyat_fakultesi.jpg</item>
+        <item>isletme_fakultesi.jpg</item>
+        <item>jeofizik_jeoloji_muhendisligi.jpg</item>
+        <item>maden_muhendisligi.png</item>
+        <item>mediko.jpg</item>
+        <item>merkez_kutuphane.JPG</item>
+        <item>mimarlik_fakultesi.jpg</item>
+        <item>pdo_derslikleri.jpg</item>
+        <item>sosyal_tesisler.png</item>
+        <item>spor_salonu.png</item>
+        <item>tinaztepe_yerleskesi_giris.jpg</item>
+        <item>tip_fakultesi.jpg</item>
+        <item>yabanci_diller_yo.png</item>
     </string-array>
+
     <!-- ////////////////////////////////////////////////// -->
 
 
@@ -355,6 +394,7 @@
         <item>Tukey Testi 0.1</item>
         <item>Tukey Testi 0.05</item>
         <item>Spearman Korelasyon Katsayısı</item>
+        <item>F</item>
     </string-array>
     <string-array name="ztablo">
         <item>0.00,0.0000</item>

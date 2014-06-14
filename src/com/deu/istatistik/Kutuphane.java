@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,8 +14,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.text.Html;
-import android.text.InputFilter;
-import android.text.Spanned;
+import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 
 import com.flurry.android.FlurryAgent;
@@ -212,6 +208,12 @@ public class Kutuphane {
 			inputManager.hideSoftInputFromWindow(activity.getCurrentFocus()
 					.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 		}
+	}
+
+	public static boolean isValidEmail(CharSequence target) {
+		return !TextUtils.isEmpty(target)
+				&& android.util.Patterns.EMAIL_ADDRESS.matcher(target)
+						.matches();
 	}
 
 }

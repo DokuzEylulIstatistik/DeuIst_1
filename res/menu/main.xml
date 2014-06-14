@@ -7,13 +7,15 @@
         android:id="@+id/action_yenile"
         android:icon="@drawable/ic_action_refresh"
         android:showAsAction="ifRoom"
-        android:title="Yenile"/>
-    <item
-        android:id="@+id/action_btnOyla"
-        android:icon="@drawable/ic_plusone_small_off_client"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_settings"/>
-   
+        android:title="Yenile"
+        app:showAsAction="ifRoom"/>
+    <!-- <item -->
+    <!-- android:id="@+id/action_btnOyla" -->
+    <!-- android:icon="@drawable/ic_plusone_small_off_client" -->
+    <!-- android:showAsAction="ifRoom" -->
+    <!-- android:title="@string/action_settings" -->
+    <!-- app:showAsAction="ifRoom"/> -->
+
     
     <!-- <item -->
 

@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_margin="10dp"
-        android:layout_weight="0.45"
-        android:text="Large Text"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/blue" />
+        android:textColor="@color/blue" 
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView_descstatlayout_content"
@@ -22,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_weight="1"
-        android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>
