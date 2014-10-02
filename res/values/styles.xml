@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <color name="turkuaz">#51B1A3</color>
+    <color name="grimsi">#C8D2D0</color>
+    <color name="koyugri">#636E6C</color>
+
     <style name="NotificationTitle">
         <item name="android:textColor">@color/sol_menu_baslik_rengi</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>

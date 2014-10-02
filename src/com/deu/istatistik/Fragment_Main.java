@@ -7,7 +7,6 @@ import static com.deu.deuistatistik.gcm.CommonUtilities.SENDER_ID;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,14 +49,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.deu.deuistatistik.gcm.ServerUtilities;
 import com.deu.deuistatistik.gcm.WakeLocker;
 import com.deu.istatistik.estatXmlParser.Entry;
-import com.flurry.android.Constants;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gcm.GCMRegistrar;
 
@@ -117,9 +114,9 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 		kutuphane.startFlurry(getActivity());
 
 		FlurryAgent.logEvent("Fragment_Main");
-		FlurryAgent.setAge(25);
-		FlurryAgent.setGender(Constants.MALE);
-		FlurryAgent.setVersionName("1.0");
+		// FlurryAgent.setAge(25);
+		// FlurryAgent.setGender(Constants.MALE);
+		// FlurryAgent.setVersionName("1.0");
 		Log.v(TAG, "onCreateView Çalýþtý");
 
 		String subtitle = getResources().getString(R.string.subtitle_duyurular);

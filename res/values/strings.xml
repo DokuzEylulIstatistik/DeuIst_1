@@ -8,6 +8,7 @@
     <string name="subtitle_tablo">Tablo Değerleri</string>
     <string name="subtitle_matris">Matris</string>
     <string name="subtitle_dagilim">Dağılımlar</string>
+     <string name="subtitle_istatistikpaylasim">İstatistik Paylaşım</string>
     <!-- SON -->
 
 
@@ -23,6 +24,8 @@
         <item>Tablo Değerleri</item>
         <item>Matris</item>
         <item>Dağılımlar</item>
+        <!-- ///////// -->
+        <item>İstatistik Paylaşım</item>
     </string-array>
     <string-array name="menulist_icon">
         <item>Duyuru_100.png</item>
@@ -32,6 +35,8 @@
         <item>Tablo_100.png</item>
         <item>Matris_100.png</item>
         <item>Kesikli_100.png</item>
+        <item>Kesikli_100.png</item>
+        <!-- ///////// -->
     </string-array>
     <!-- SON -->
 

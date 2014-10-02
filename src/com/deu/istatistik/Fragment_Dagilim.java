@@ -74,7 +74,7 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 	private void fillDagilimList() {
 		spinner_titleDagilimlar = (Spinner) rootview
 				.findViewById(R.id.spinner_titleDagilimlar);
-		ArrayAdapter<String> adap = new ArrayAdapter<>(activity,
+		ArrayAdapter<String> adap = new ArrayAdapter<String>(activity,
 				android.R.layout.simple_spinner_dropdown_item, titles);
 		spinner_titleDagilimlar.setAdapter(adap);
 	}

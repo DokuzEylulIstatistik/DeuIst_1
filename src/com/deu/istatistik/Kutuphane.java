@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -214,6 +215,19 @@ public class Kutuphane {
 		return !TextUtils.isEmpty(target)
 				&& android.util.Patterns.EMAIL_ADDRESS.matcher(target)
 						.matches();
+	}
+
+	public static String changeCharset(String veri) {
+		String name = "";
+		try {
+			name = new String(veri.getBytes("ISO-8859-9"), "ISO-8859-9");
+		} catch (UnsupportedEncodingException e) {
+
+			e.printStackTrace();
+		}
+
+		String decodedName = Html.fromHtml(name).toString();
+		return decodedName;
 	}
 
 }

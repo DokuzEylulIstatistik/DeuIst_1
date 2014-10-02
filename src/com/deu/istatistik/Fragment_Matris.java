@@ -34,7 +34,7 @@ public class Fragment_Matris extends Fragment implements
 	Resources resources;
 
 	// LayoutInflater inflater;
-	private ActionBar getActionBar() {
+	private android.support.v7.app.ActionBar getActionBar() {
 		return ((ActionBarActivity) getActivity()).getSupportActionBar();
 	}
 
@@ -53,7 +53,7 @@ public class Fragment_Matris extends Fragment implements
 		String actionbarSubTitle = getResources().getString(
 				R.string.subtitle_matris);
 
-		ActionBar actionBar = getActionBar();
+		android.support.v7.app.ActionBar actionBar = getActionBar();
 		actionBar.setSubtitle(actionbarSubTitle);
 		actionBar.setTitle("Not Hesaplama");
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -358,7 +358,7 @@ public class Fragment_Matris extends Fragment implements
 
 	private ArrayList<String> matrisIslemListMap() {
 
-		ArrayList<String> sonuc = new ArrayList<>();
+		ArrayList<String> sonuc = new ArrayList<String>();
 		sonuc.add("Lütfen iþlem seçiniz.");
 
 		String[] islemlistesi = resources.getStringArray(R.array.islemlist);
@@ -376,7 +376,7 @@ public class Fragment_Matris extends Fragment implements
 
 		Spinner islemlistspinner = (Spinner) rootview
 				.findViewById(R.id.spinner_islemlist);
-		ArrayAdapter<String> adap = new ArrayAdapter<>(activity,
+		ArrayAdapter<String> adap = new ArrayAdapter<String>(activity,
 				android.R.layout.simple_spinner_dropdown_item,
 				matrisIslemListMap());
 		islemlistspinner.setAdapter(adap);

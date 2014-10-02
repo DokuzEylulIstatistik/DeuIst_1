@@ -10,11 +10,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 
 public class MainActivity extends ActionBarActivity implements
@@ -46,74 +48,87 @@ public class MainActivity extends ActionBarActivity implements
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 	}
 
+	public class loadFragment {
+		private FragmentManager fragmentManager = getSupportFragmentManager();
+		private Fragment fragment;
+		private android.support.v4.app.FragmentTransaction transaction;
+		private int animationID_1;
+		private int animationID_2;
+
+		public loadFragment() {
+
+			this.animationID_1 = android.R.anim.slide_in_left;
+			this.animationID_2 = android.R.anim.slide_out_right;
+			this.transaction = fragmentManager.beginTransaction();
+		}
+
+		public void setFragment(Fragment frg) {
+			this.fragment = frg;
+		}
+
+		public void setAnimation(int anim1, int anim2) {
+			this.animationID_1 = anim1;
+			this.animationID_2 = anim2;
+		}
+
+		public void commitFragment() {
+
+			transaction.setCustomAnimations(animationID_1, animationID_2)
+					.replace(R.id.container, fragment).commit();
+		}
+
+		public void addToBackStack() {
+			transaction.addToBackStack("backstage");
+		}
+
+	}
+
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
-		// update the main content by replacing fragments
-		FragmentManager fragmentManager = getSupportFragmentManager();
+
+		loadFragment load = new loadFragment();
 
 		if (position == 0) {
-			Fragment_Main mainfragment = new Fragment_Main();
-			fragmentManager
-					.beginTransaction()
-					.setCustomAnimations(android.R.anim.fade_in,
-							android.R.anim.fade_out)
-					.replace(R.id.container, mainfragment).commit();
+
+			load.setFragment(new Fragment_Main());
+			load.setAnimation(android.R.anim.fade_in, android.R.anim.fade_out);
+			load.commitFragment();
 
 		} else if (position == 1) {
-			Fragment_OrtHesap orthesapfragment = new Fragment_OrtHesap();
-			fragmentManager
-					.beginTransaction()
-					.setCustomAnimations(android.R.anim.slide_in_left,
-							android.R.anim.slide_out_right)
-					.replace(R.id.container, orthesapfragment).commit();
+			load.setFragment(new Fragment_OrtHesap());
+			load.setAnimation(android.R.anim.fade_in, android.R.anim.fade_out);
+			load.commitFragment();
 
 		} else if (position == 3) {
-			Fragment_DescStats duyurufragment = new Fragment_DescStats();
-			fragmentManager
-					.beginTransaction()
-					.setCustomAnimations(android.R.anim.slide_in_left,
-							android.R.anim.slide_out_right)
-					.replace(R.id.container, duyurufragment).commit();
+			load.setFragment(new Fragment_DescStats());
+			load.commitFragment();
 
 		} else if (position == 2) {
 
 			Intent intent = new Intent(this, HaritaActivity.class);
+
 			startActivity(intent);
-			// Fragment_Harita haritafragment = new Fragment_Harita();
-			// fragmentManager.beginTransaction()
-			// .replace(R.id.container, haritafragment).commit();
+
 		} else if (position == 4) {
-			FragmentTablo tablofragment = new FragmentTablo();
-			fragmentManager
-					.beginTransaction()
-					.setCustomAnimations(android.R.anim.slide_in_left,
-							android.R.anim.slide_out_right)
-					.replace(R.id.container, tablofragment).commit();
+			load.setFragment(new FragmentTablo());
+			load.commitFragment();
 
 		} else if (position == 5) {
-			Fragment_Matris matrisfragment = new Fragment_Matris();
-			fragmentManager
-					.beginTransaction()
-					.setCustomAnimations(android.R.anim.slide_in_left,
-							android.R.anim.slide_out_right)
-					.replace(R.id.container, matrisfragment).commit();
+			load.setFragment(new Fragment_Matris());
+			load.commitFragment();
 
 		} else if (position == 6) {
-			Fragment_Dagilim dagilimfragment = new Fragment_Dagilim();
-			fragmentManager
-					.beginTransaction()
-					.setCustomAnimations(android.R.anim.slide_in_left,
-							android.R.anim.slide_out_right)
-					.replace(R.id.container, dagilimfragment).commit();
-			// Intent intent = new Intent(this, ActivityDagilim2.class);
-			// startActivity(intent);
+			load.setFragment(new Fragment_Dagilim());
+			load.commitFragment();
+
+		} else if (position == 7) {
+			Fragment frg = new Fragment_IstatistikPaylasim();
+
+			load.setFragment(frg);
+			load.commitFragment();
 
 		}
 
-		// fragmentManager
-		// .beginTransaction()
-		// .replace(R.id.container,
-		// PlaceholderFragment.newInstance(position + 1)).commit();
 	}
 
 	public void onSectionAttached(int number) {
@@ -192,31 +207,49 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	@Override
+	public void onBackPressed() {
+		if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+			this.finish();
+		} else {
+			getSupportFragmentManager().popBackStack();
+		}
+	}
+
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("Uygulamadan çýkmak istediðinize emin misiniz?")
-					.setCancelable(false)
-					.setPositiveButton("Evet",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int id) {
-									finish();
-								}
-							})
-					.setNegativeButton("Hayýr",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int id) {
-									dialog.cancel();
-								}
-							});
-			AlertDialog alert = builder.create();
-			alert.show();
-			return true;
+
+			if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage(
+						"Uygulamadan çýkmak istediðinize emin misiniz?")
+						.setCancelable(false)
+						.setPositiveButton("Evet",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										finish();
+									}
+								})
+						.setNegativeButton("Hayýr",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										dialog.cancel();
+									}
+								});
+				AlertDialog alert = builder.create();
+				alert.show();
+				return true;
+			} else {
+				getSupportFragmentManager().popBackStack();
+				return false;
+			}
 		} else {
+
 			return super.onKeyDown(keyCode, event);
 		}
+
 	}
 
 	/**

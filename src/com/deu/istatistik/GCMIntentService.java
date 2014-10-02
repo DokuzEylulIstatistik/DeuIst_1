@@ -135,7 +135,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 		bb.setContentTitle(title).setContentText(message)
 				.setContentIntent(intent).setSmallIcon(icon)
 				.setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true)
-				.setNumber(5).setSubText("Aykut Asil");
+				.setSubText("Dokuz Eylül Üniversitesi").setTicker("NAber laaa");
 
 		// notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
