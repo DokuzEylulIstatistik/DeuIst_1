@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/acilisverilercustomclickstyle"
     android:focusable="true"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-<!--     <WebView -->
-<!--         android:id="@+id/webview1" -->
-<!--         android:layout_width="match_parent" -->
-<!--         android:layout_height="wrap_content" /> -->
+    <!-- android:background="@drawable/acilisverilercustomclickstyle" -->
+
+
+    <!-- <WebView -->
+    <!-- android:id="@+id/webview1" -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="wrap_content" /> -->
 
     <TextView
         android:id="@+id/acilis_txtBaslik"

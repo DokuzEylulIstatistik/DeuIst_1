@@ -1,11 +1,23 @@
 package com.deu.istatistik;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,11 +25,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
+import com.aka.qwerty.dbSqLite;
 import com.flurry.android.FlurryAgent;
 
 public class Kutuphane {
@@ -220,7 +235,7 @@ public class Kutuphane {
 	public static String changeCharset(String veri) {
 		String name = "";
 		try {
-			name = new String(veri.getBytes("ISO-8859-9"), "ISO-8859-9");
+			name = new String(veri.getBytes("iso-8859-9"), "iso-8859-9");
 		} catch (UnsupportedEncodingException e) {
 
 			e.printStackTrace();
@@ -229,5 +244,101 @@ public class Kutuphane {
 		String decodedName = Html.fromHtml(name).toString();
 		return decodedName;
 	}
+
+	public InputStream getdownloadUrl(String urlString) throws IOException {
+
+		InputStream stream = null;
+		try {
+
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpGet httpPost = new HttpGet(urlString);
+			HttpResponse response = httpClient.execute(httpPost);
+			HttpEntity entity = response.getEntity();
+			String resultsStringg = EntityUtils.toString(entity, "ISO-8859-9");
+			stream = new ByteArrayInputStream(
+					resultsStringg.getBytes("ISO-8859-9"));
+		} catch (Exception e) {
+			Log.e("Kutuphane", e.getMessage());
+
+		}
+		return stream;
+	}
+
+	public InputStream getdownloadUrl_DefaultConnection(String urlString)
+			throws IOException {
+
+		InputStream stream = null;
+		try {
+			URL url = new URL(urlString);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setReadTimeout(10000 /* milliseconds */);
+			conn.setConnectTimeout(15000 /* milliseconds */);
+			conn.setRequestMethod("GET");
+			conn.setDoInput(true);
+			// Starts the query
+			conn.connect();
+
+			stream = conn.getInputStream();
+			// conn.disconnect();
+
+		} catch (Exception e) {
+			Log.e("Kutuphane", e.getMessage());
+
+		}
+		return stream;
+	}
+
+	public String getStringtoInputStream(InputStream is) {
+		String sonuc = null;
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					is, "iso-8859-9"), 8); // iso-8859-1
+
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "/n");
+			}
+			is.close();
+			sonuc = sb.toString();
+		} catch (Exception e) {
+			Log.i("Buffer Error", "Error converting result " + e.toString());
+		}
+		return sonuc;
+
+	}
+
+	public JSONObject getJsonObjecttoString(String json) {
+		JSONObject jObj = null;
+		try {
+			if (json != null) {
+				jObj = new JSONObject(json);
+			} else {
+				jObj = null;
+			}
+
+		} catch (JSONException e) {
+			Log.e("JSON Parser", "Error parsing data "
+					+ e.getMessage().toString());
+		}
+		return jObj;
+	}
+
+	public String getPathSqliteDatabase(String db_name, Activity activity) {
+		String dbPath = activity.getFilesDir().getParent();
+		String dbPath1 = dbPath + "/databases/" + db_name;
+
+		return dbPath1;
+	}
+
+
+
+
+
+
+
+
+
+
 
 }

@@ -111,6 +111,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 				context.getString(R.string.notification_mainTitle));
 		contentView.setTextViewText(R.id.text, message);
 		contentView.setTextViewText(R.id.text1, "Aykut Asil");
+	
 
 		NotificationManager notificationManager = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -134,8 +135,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 		NotificationCompat.Builder bb = new Builder(context);
 		bb.setContentTitle(title).setContentText(message)
 				.setContentIntent(intent).setSmallIcon(icon)
-				.setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true)
-				.setSubText("Dokuz Eylül Üniversitesi").setTicker("NAber laaa");
+				.setDefaults(Notification.DEFAULT_ALL)
+				.setSubText("Dokuz Eylül Üniversitesi").setTicker("DEU Ýstatistik ")
+				.setContent(contentView);
 
 		// notification.flags |= Notification.FLAG_AUTO_CANCEL;
 

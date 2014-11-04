@@ -79,7 +79,7 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 		spinner_titleDagilimlar.setAdapter(adap);
 	}
 
-	private void setClickListener() {
+	public void setClickListener() {
 
 		Kutuphane.hideKeyboard(activity);
 		Button btn_dagilimSecClick = (Button) rootview
@@ -87,7 +87,7 @@ public class Fragment_Dagilim extends Fragment implements OnClickListener {
 		btn_dagilimSecClick.setOnClickListener(this);
 	}
 
-	private void btn_dagilimSecClick(View vi) {
+	public void btn_dagilimSecClick(View vi) {
 		int position = spinner_titleDagilimlar.getSelectedItemPosition();
 
 		setVisibility_sonucContainer(View.GONE);

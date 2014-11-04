@@ -4,7 +4,7 @@
  * aapt tool from the resource data it found.  It
  * should not be modified by hand.
  */
-package android.support.v7.appcompat;
+package com.daimajia.slider.library;
 
 public final class R {
 	public static final class anim {
@@ -16,6 +16,8 @@ public final class R {
 		public static final int abc_slide_out_top = 0x7f040005;
 	}
 	public static final class attr {
+		public static final int PagerIndicatorStyle = 0x7f0100c4;
+		public static final int SliderStyle = 0x7f0100c3;
 		public static final int actionBarDivider = 0x7f010015;
 		public static final int actionBarItemBackground = 0x7f010016;
 		public static final int actionBarPopupTheme = 0x7f01000f;
@@ -50,6 +52,7 @@ public final class R {
 		public static final int actionProviderClass = 0x7f010074;
 		public static final int actionViewClass = 0x7f010073;
 		public static final int activityChooserViewStyle = 0x7f010034;
+		public static final int auto_cycle = 0x7f0100aa;
 		public static final int background = 0x7f01005d;
 		public static final int backgroundSplit = 0x7f01005f;
 		public static final int backgroundStacked = 0x7f01005e;
@@ -98,6 +101,7 @@ public final class R {
 		public static final int icon = 0x7f01005a;
 		public static final int iconifiedByDefault = 0x7f01007a;
 		public static final int indeterminateProgressStyle = 0x7f010063;
+		public static final int indicator_visibility = 0x7f0100a9;
 		public static final int initialActivityCount = 0x7f010084;
 		public static final int isLightTheme = 0x7f010002;
 		public static final int itemPadding = 0x7f010065;
@@ -119,6 +123,12 @@ public final class R {
 		public static final int overlapAnchor = 0x7f010098;
 		public static final int paddingEnd = 0x7f01006f;
 		public static final int paddingStart = 0x7f01006e;
+		public static final int padding_bottom = 0x7f0100ba;
+		public static final int padding_left = 0x7f0100b7;
+		public static final int padding_right = 0x7f0100b8;
+		public static final int padding_top = 0x7f0100b9;
+		public static final int pager_animation = 0x7f0100ab;
+		public static final int pager_animation_span = 0x7f0100ac;
 		public static final int panelBackground = 0x7f010049;
 		public static final int panelMenuListTheme = 0x7f01004b;
 		public static final int panelMenuListWidth = 0x7f01004a;
@@ -136,6 +146,15 @@ public final class R {
 		public static final int searchViewStyle = 0x7f01003f;
 		public static final int selectableItemBackground = 0x7f010030;
 		public static final int selectableItemBackgroundBorderless = 0x7f010031;
+		public static final int selected_color = 0x7f0100af;
+		public static final int selected_drawable = 0x7f0100b1;
+		public static final int selected_height = 0x7f0100b4;
+		public static final int selected_padding_bottom = 0x7f0100be;
+		public static final int selected_padding_left = 0x7f0100bb;
+		public static final int selected_padding_right = 0x7f0100bc;
+		public static final int selected_padding_top = 0x7f0100bd;
+		public static final int selected_width = 0x7f0100b3;
+		public static final int shape = 0x7f0100ae;
 		public static final int showAsAction = 0x7f010071;
 		public static final int showDividers = 0x7f010088;
 		public static final int showText = 0x7f0100a8;
@@ -177,6 +196,15 @@ public final class R {
 		public static final int toolbarStyle = 0x7f010035;
 		public static final int topBottomBarArrowSize = 0x7f01009d;
 		public static final int track = 0x7f0100a2;
+		public static final int unselected_color = 0x7f0100b0;
+		public static final int unselected_drawable = 0x7f0100b2;
+		public static final int unselected_height = 0x7f0100b6;
+		public static final int unselected_padding_bottom = 0x7f0100c2;
+		public static final int unselected_padding_left = 0x7f0100bf;
+		public static final int unselected_padding_right = 0x7f0100c0;
+		public static final int unselected_padding_top = 0x7f0100c1;
+		public static final int unselected_width = 0x7f0100b5;
+		public static final int visibility = 0x7f0100ad;
 		public static final int voiceIcon = 0x7f01007f;
 		public static final int windowActionBar = 0x7f010003;
 		public static final int windowActionBarOverlay = 0x7f010004;
@@ -351,8 +379,25 @@ public final class R {
 		public static final int abc_textfield_search_activated_mtrl_alpha = 0x7f020030;
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f020031;
 		public static final int abc_textfield_search_material = 0x7f020032;
+		public static final int indicator_corner_bg = 0x7f020062;
 	}
 	public static final class id {
+		public static final int Accordion = 0x7f090022;
+		public static final int Background2Foreground = 0x7f090023;
+		public static final int CubeIn = 0x7f090024;
+		public static final int Default = 0x7f090025;
+		public static final int DepthPage = 0x7f090026;
+		public static final int Fade = 0x7f090027;
+		public static final int FlipHorizontal = 0x7f090028;
+		public static final int FlipPage = 0x7f090029;
+		public static final int Foreground2Background = 0x7f09002a;
+		public static final int RotateDown = 0x7f09002b;
+		public static final int RotateUp = 0x7f09002c;
+		public static final int Stack = 0x7f09002d;
+		public static final int Tablet = 0x7f09002e;
+		public static final int ZoomIn = 0x7f09002f;
+		public static final int ZoomOut = 0x7f090030;
+		public static final int ZoomOutSlide = 0x7f090031;
 		public static final int action_bar = 0x7f090058;
 		public static final int action_bar_activity_content = 0x7f090003;
 		public static final int action_bar_container = 0x7f090057;
@@ -372,8 +417,19 @@ public final class R {
 		public static final int bottom = 0x7f09001e;
 		public static final int checkbox = 0x7f090050;
 		public static final int collapseActionView = 0x7f090015;
+		public static final int daimajia_indicator_wrapper = 0x7f0900a0;
+		public static final int daimajia_slider_image = 0x7f0900b0;
+		public static final int daimajia_slider_viewpager = 0x7f0900b4;
 		public static final int decor_content_parent = 0x7f090056;
 		public static final int default_activity_button = 0x7f09004b;
+		public static final int default_bottom_left_indicator = 0x7f0900b7;
+		public static final int default_bottom_right_indicator = 0x7f0900b6;
+		public static final int default_center_bottom_indicator = 0x7f0900b5;
+		public static final int default_center_top_indicator = 0x7f0900b8;
+		public static final int default_center_top_left_indicator = 0x7f0900ba;
+		public static final int default_center_top_right_indicator = 0x7f0900b9;
+		public static final int description = 0x7f0900b3;
+		public static final int description_layout = 0x7f0900b2;
 		public static final int dialog = 0x7f090019;
 		public static final int disableHome = 0x7f09000d;
 		public static final int dropdown = 0x7f09001a;
@@ -386,15 +442,19 @@ public final class R {
 		public static final int icon = 0x7f09004d;
 		public static final int ifRoom = 0x7f090016;
 		public static final int image = 0x7f09004a;
+		public static final int invisible = 0x7f090020;
 		public static final int listMode = 0x7f09000a;
 		public static final int list_item = 0x7f09004c;
+		public static final int loading_bar = 0x7f0900b1;
 		public static final int middle = 0x7f09001d;
 		public static final int never = 0x7f090017;
 		public static final int none = 0x7f09000f;
 		public static final int normal = 0x7f09000b;
+		public static final int oval = 0x7f090032;
 		public static final int progress_circular = 0x7f090007;
 		public static final int progress_horizontal = 0x7f090008;
 		public static final int radio = 0x7f090052;
+		public static final int rect = 0x7f090033;
 		public static final int search_badge = 0x7f09005c;
 		public static final int search_bar = 0x7f09005b;
 		public static final int search_button = 0x7f09005d;
@@ -416,6 +476,7 @@ public final class R {
 		public static final int top = 0x7f09001f;
 		public static final int up = 0x7f090001;
 		public static final int useLogo = 0x7f090013;
+		public static final int visible = 0x7f090021;
 		public static final int withText = 0x7f090018;
 		public static final int wrap_content = 0x7f090009;
 	}
@@ -446,6 +507,10 @@ public final class R {
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030014;
 		public static final int abc_search_view = 0x7f030015;
 		public static final int abc_simple_dropdown_hint = 0x7f030016;
+		public static final int indicator_layout = 0x7f03002c;
+		public static final int render_type_default = 0x7f030033;
+		public static final int render_type_text = 0x7f030034;
+		public static final int slider_layout = 0x7f030035;
 		public static final int support_simple_spinner_dropdown_item = 0x7f030038;
 	}
 	public static final class string {
@@ -464,8 +529,12 @@ public final class R {
 		public static final int abc_searchview_description_voice = 0x7f0a000a;
 		public static final int abc_shareactionprovider_share_with = 0x7f0a000e;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f0a000d;
+		public static final int app_name = 0x7f0a000f;
 	}
 	public static final class style {
+		public static final int AndroidImageSlider_Attractive_Rect_Blue = 0x7f0b00ec;
+		public static final int AndroidImageSlider_Corner_Oval_Orange = 0x7f0b00eb;
+		public static final int AndroidImageSlider_Magnifier_Oval_Black = 0x7f0b00ed;
 		public static final int Base_TextAppearance_AppCompat = 0x7f0b0098;
 		public static final int Base_TextAppearance_AppCompat_Body1 = 0x7f0b00a3;
 		public static final int Base_TextAppearance_AppCompat_Body2 = 0x7f0b00a2;
@@ -809,6 +878,29 @@ public final class R {
 		public static final int MenuView_android_verticalDivider = 3;
 		public static final int MenuView_android_windowAnimationStyle = 0;
 		public static final int MenuView_preserveIconSpacing = 7;
+		public static final int[] PagerIndicator = { 0x7f0100ad, 0x7f0100ae, 0x7f0100af, 0x7f0100b0, 0x7f0100b1, 0x7f0100b2, 0x7f0100b3, 0x7f0100b4, 0x7f0100b5, 0x7f0100b6, 0x7f0100b7, 0x7f0100b8, 0x7f0100b9, 0x7f0100ba, 0x7f0100bb, 0x7f0100bc, 0x7f0100bd, 0x7f0100be, 0x7f0100bf, 0x7f0100c0, 0x7f0100c1, 0x7f0100c2 };
+		public static final int PagerIndicator_padding_bottom = 13;
+		public static final int PagerIndicator_padding_left = 10;
+		public static final int PagerIndicator_padding_right = 11;
+		public static final int PagerIndicator_padding_top = 12;
+		public static final int PagerIndicator_selected_color = 2;
+		public static final int PagerIndicator_selected_drawable = 4;
+		public static final int PagerIndicator_selected_height = 7;
+		public static final int PagerIndicator_selected_padding_bottom = 17;
+		public static final int PagerIndicator_selected_padding_left = 14;
+		public static final int PagerIndicator_selected_padding_right = 15;
+		public static final int PagerIndicator_selected_padding_top = 16;
+		public static final int PagerIndicator_selected_width = 6;
+		public static final int PagerIndicator_shape = 1;
+		public static final int PagerIndicator_unselected_color = 3;
+		public static final int PagerIndicator_unselected_drawable = 5;
+		public static final int PagerIndicator_unselected_height = 9;
+		public static final int PagerIndicator_unselected_padding_bottom = 21;
+		public static final int PagerIndicator_unselected_padding_left = 18;
+		public static final int PagerIndicator_unselected_padding_right = 19;
+		public static final int PagerIndicator_unselected_padding_top = 20;
+		public static final int PagerIndicator_unselected_width = 8;
+		public static final int PagerIndicator_visibility = 0;
 		public static final int[] PopupWindow = { 0x01010176, 0x7f010098 };
 		public static final int[] PopupWindowBackgroundState = { 0x7f010097 };
 		public static final int PopupWindowBackgroundState_state_above_anchor = 0;
@@ -830,6 +922,11 @@ public final class R {
 		public static final int SearchView_submitBackground = 14;
 		public static final int SearchView_suggestionRowLayout = 12;
 		public static final int SearchView_voiceIcon = 10;
+		public static final int[] SliderLayout = { 0x7f0100a9, 0x7f0100aa, 0x7f0100ab, 0x7f0100ac };
+		public static final int SliderLayout_auto_cycle = 1;
+		public static final int SliderLayout_indicator_visibility = 0;
+		public static final int SliderLayout_pager_animation = 2;
+		public static final int SliderLayout_pager_animation_span = 3;
 		public static final int[] Spinner = { 0x010100af, 0x010100d4, 0x01010175, 0x01010176, 0x01010262, 0x010102ac, 0x010102ad, 0x7f010075, 0x7f010076, 0x7f010077, 0x7f010078 };
 		public static final int Spinner_android_background = 1;
 		public static final int Spinner_android_dropDownHorizontalOffset = 5;
@@ -937,6 +1034,9 @@ public final class R {
 		public static final int Theme_windowFixedHeightMinor = 5;
 		public static final int Theme_windowFixedWidthMajor = 4;
 		public static final int Theme_windowFixedWidthMinor = 6;
+		public static final int[] Themes = { 0x7f0100c3, 0x7f0100c4 };
+		public static final int Themes_PagerIndicatorStyle = 1;
+		public static final int Themes_SliderStyle = 0;
 		public static final int[] Toolbar = { 0x010100af, 0x01010140, 0x7f010000, 0x7f010057, 0x7f010067, 0x7f010068, 0x7f010069, 0x7f01006a, 0x7f01006c, 0x7f01008a, 0x7f01008b, 0x7f01008c, 0x7f01008d, 0x7f01008e, 0x7f01008f, 0x7f010090, 0x7f010091, 0x7f010092, 0x7f010093, 0x7f010094, 0x7f010095, 0x7f010096 };
 		public static final int Toolbar_android_gravity = 0;
 		public static final int Toolbar_android_minHeight = 1;

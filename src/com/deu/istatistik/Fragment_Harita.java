@@ -253,47 +253,7 @@ public class Fragment_Harita extends Fragment implements LocationListener,
 		googleHarita.setMyLocationEnabled(true);
 	}
 
-	private void HaritadaGoster(LatLng latlng) {
-		//
-		// googleHarita = ((SupportMapFragment) getSupportFragmentManager()
-		// .findFragmentById(R.id.haritafragment)).getMap();
-		// googleHarita.setOnMarkerClickListener(this);
-
-		if (googleHarita != null) {
-			LatLng Koordinat = latlng;
-
-			googleHarita.clear();
-
-			// googleHarita.setMyLocationEnabled(true);
-			// googleHarita.addMarker(new MarkerOptions().position(Koordinat)
-			// .title("Burdasýn"));
-			// googleHarita.addMarker(new MarkerOptions()
-			// .icon(BitmapDescriptorFactory
-			// .fromResource(android.R.drawable.ic_input_add))
-			// .title("Burdasýn").position(Koordinat));
-
-			// getKonumParcala();
-			HaritayaKonumEkle();
-			// googleHarita.moveCamera(CameraUpdateFactory.newLatLngZoom(
-			// Koordinat, 16));
-
-			// googleHarita.addMarker(new MarkerOptions()
-			// .icon(BitmapDescriptorFactory
-			// .fromResource(R.drawable.ic_launcher))
-			// .position(new LatLng(35, 23)).flat(true).rotation(245));
-
-			// CameraPosition cameraPosition = CameraPosition.builder()
-			// .target(Koordinat).zoom(13).bearing(90).build();
-
-			// Animate the change in camera view over 2 seconds
-			// googleHarita.animateCamera(
-			// CameraUpdateFactory.newCameraPosition(cameraPosition),
-			// 2000, null);
-
-		}
-
-	}
-
+	
 	private void addMarkertoMap(LatLng latlng, BitmapDescriptor icon,
 			String title) {
 

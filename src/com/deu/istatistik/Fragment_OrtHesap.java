@@ -13,11 +13,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -25,7 +23,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.SpinnerAdapter;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TabHost;
@@ -81,16 +78,17 @@ public class Fragment_OrtHesap extends Fragment implements OnClickListener,
 		tabhost.addTab(tag2);
 
 		tabhost.setCurrentTab(0);
-
+		// ////
 		getDersListesi1();
 		getSatirDoldurDiger();
-
+		// ////
 		Button btn_hesapla = (Button) rootview.findViewById(R.id.btn_hesapla);
 		btn_hesapla.setOnClickListener(this);
+
 		Button btn_hesapla_diger = (Button) rootview
 				.findViewById(R.id.btn_hesapla_diger);
 		btn_hesapla_diger.setOnClickListener(this);
-
+		// ////
 		setHasOptionsMenu(true);
 		return rootview;
 
@@ -142,6 +140,7 @@ public class Fragment_OrtHesap extends Fragment implements OnClickListener,
 		spn = new Spinner[dersler.size()];
 
 		for (int i = 0; i < dersler.size(); i++) {
+
 			llx[i] = new LinearLayout(getActivity());
 			llx[i].setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT, 3f));
@@ -189,7 +188,10 @@ public class Fragment_OrtHesap extends Fragment implements OnClickListener,
 			llx[i].addView(tx[i]);
 			llx[i].addView(tx1[i]);
 			llx[i].addView(spn[i]);
-			ll.addView(llx[i]);
+
+			LinearLayout lnr_qwe = llx[i];
+			ll.addView(lnr_qwe);
+
 		}
 	}
 
@@ -427,13 +429,15 @@ public class Fragment_OrtHesap extends Fragment implements OnClickListener,
 
 	// MyListView in içindeki Layoutlarý seçerek içinin temizlenmesini saðlar.
 	public void MyListViewTemizle() {
-		LinearLayout satirlar = (LinearLayout) rootView
+		final LinearLayout satirlar = (LinearLayout) rootView
 				.findViewById(R.id.listViewistatistik);
 		int sayac = satirlar.getChildCount();
 
-		for (int a = sayac; a > -1; a--) {
-			View vi = (LinearLayout) satirlar.getChildAt(a);
+		for (int a = sayac - 1; a > -1; a--) {
+			final View vi = (LinearLayout) satirlar.getChildAt(a);
+
 			satirlar.removeView(vi);
+
 		}
 	}
 

@@ -2,7 +2,7 @@
 <resources>
 
     <!-- ActionBar Subtitle -->
-    <string name="subtitle_orthes">Genel Not Ortalaması</string>
+    <string name="subtitle_orthes" >Genel Not Ortalaması</string>
     <string name="subtitle_desc_stat">Tanımlayıcı İstatistikler</string>
     <string name="subtitle_duyurular">Dokuz Eylül Üniversitesi</string>
     <string name="subtitle_tablo">Tablo Değerleri</string>
@@ -35,7 +35,7 @@
         <item>Tablo_100.png</item>
         <item>Matris_100.png</item>
         <item>Kesikli_100.png</item>
-        <item>Kesikli_100.png</item>
+        <item>Paylas_100.png</item>
         <!-- ///////// -->
     </string-array>
     <!-- SON -->
@@ -254,7 +254,7 @@
         <item>Türk Dili I,2</item>
     </string-array>
     <string-array name="sinif1donem2">
-        <item>Probleme Dayalı Öğrenme II,2</item>
+        <item>PDÖ II,2</item>
         <item>Probability and Statistics II,4</item>
         <item>Computational Tools for Statistics II,2</item>
         <item>Technical English II,2</item>
@@ -267,7 +267,7 @@
         <item>Müzik,0</item>
     </string-array>
     <string-array name="sinif2donem1">
-        <item>Probleme Dayalı Öğrenme III,2</item>
+        <item>PDÖ III,2</item>
         <item>Mathematical Statistics,4</item>
         <item>Örnekleme Yöntemleri,3</item>
         <item>İstatistiksel Kalite Kontrol,3</item>
@@ -277,7 +277,7 @@
         <item>FSH,2</item>
     </string-array>
     <string-array name="sinif2donem2">
-        <item>Probleme Dayalı Öğrenme IV,2</item>
+        <item>PDÖ IV,2</item>
         <item>Statistical Inference,4</item>
         <item>Anket Tasarımı ve Çözümlemesi,3</item>
         <item>Toplam Kalite Yönetimi,3</item>

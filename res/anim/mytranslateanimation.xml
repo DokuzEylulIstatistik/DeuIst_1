@@ -2,9 +2,10 @@
 <translate xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="200"
     android:fromXDelta="0"
-    android:interpolator="@android:anim/bounce_interpolator"
+	android:interpolator="@android:anim/bounce_interpolator"	
     android:repeatCount="1"
     android:repeatMode="reverse"
-    android:toXDelta="100" >
-
+    android:toXDelta="100">
+    
+    
 </translate>

@@ -13,11 +13,13 @@ import android.util.Log;
 
 public class dbSqLite extends SQLiteOpenHelper {
 
-	private static String DB_NAME = "db_depo";
+	public static String DB_NAME = "db_depo";
 	private String TB_ISTATISTIK = "TB_ISTATISTIK";
 
 	public dbSqLite(Context context) {
-		super(context, DB_NAME, null, 5);
+
+		super(context, DB_NAME, null, 1);
+
 	}
 
 	private dbSqLite(Context context, String name, CursorFactory factory,
@@ -60,6 +62,7 @@ public class dbSqLite extends SQLiteOpenHelper {
 
 		SQLiteDatabase qq = this.getWritableDatabase();
 		qq.insertOrThrow(this.TB_ISTATISTIK, null, values);
+		qq.close();
 	}
 
 	public List<obj_IstatistikPaylasim> getIstatistikList() {
@@ -85,4 +88,11 @@ public class dbSqLite extends SQLiteOpenHelper {
 		return liste;
 
 	}
+
+	public void ReloadTables(SQLiteDatabase db) {
+		Log.d("dbSqLite", "ReloadTables");
+		db.execSQL("DROP TABLE IF EXISTS " + TB_ISTATISTIK);
+		onCreate(db);
+	}
+
 }

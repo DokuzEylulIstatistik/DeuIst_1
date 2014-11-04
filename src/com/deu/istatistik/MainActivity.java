@@ -10,13 +10,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 
 public class MainActivity extends ActionBarActivity implements
@@ -46,6 +44,13 @@ public class MainActivity extends ActionBarActivity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+
+		// if (android.os.Build.VERSION.SDK_INT > 9) {
+		// StrictMode.ThreadPolicy policy = new
+		// StrictMode.ThreadPolicy.Builder()
+		// .permitAll().build();
+		// StrictMode.setThreadPolicy(policy);
+		// }
 	}
 
 	public class loadFragment {
@@ -96,7 +101,8 @@ public class MainActivity extends ActionBarActivity implements
 
 		} else if (position == 1) {
 			load.setFragment(new Fragment_OrtHesap());
-			load.setAnimation(android.R.anim.fade_in, android.R.anim.fade_out);
+			// load.setAnimation(android.R.anim.fade_in,
+			// android.R.anim.fade_out);
 			load.commitFragment();
 
 		} else if (position == 3) {
@@ -122,9 +128,7 @@ public class MainActivity extends ActionBarActivity implements
 			load.commitFragment();
 
 		} else if (position == 7) {
-			Fragment frg = new Fragment_IstatistikPaylasim();
-
-			load.setFragment(frg);
+			load.setFragment(new Fragment_IstatistikPaylasim());
 			load.commitFragment();
 
 		}
@@ -242,6 +246,7 @@ public class MainActivity extends ActionBarActivity implements
 				alert.show();
 				return true;
 			} else {
+
 				getSupportFragmentManager().popBackStack();
 				return false;
 			}

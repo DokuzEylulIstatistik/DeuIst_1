@@ -6,14 +6,19 @@
     <!-- android:width="2dp" -->
     <!-- android:color="#000" /> -->
 
-
-    <corners android:radius="1dp" />
+    <corners android:radius="5dp" />
 
     <solid android:color="#fff" />
 
+    <!-- <gradient -->
+    <!-- android:centerColor="#f2eaea" -->
+    <!-- android:endColor="#eaeaea" -->
+    <!-- android:startColor="#eaeaea" /> -->
+
     <gradient
-        android:centerColor="#f2eaea"
-        android:endColor="#eaeaea"
-        android:startColor="#eaeaea" />
+        android:angle="180"
+        android:centerColor="#D6D6D6"
+        android:endColor="#848484"
+        android:startColor="#F2F2F2" />
 
 </shape>

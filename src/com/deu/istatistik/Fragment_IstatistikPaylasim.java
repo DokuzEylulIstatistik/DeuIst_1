@@ -1,26 +1,19 @@
 package com.deu.istatistik;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,6 +23,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,8 +41,6 @@ import android.widget.TextView;
 
 import com.aka.qwerty.dbSqLite;
 import com.aka.qwerty.obj_IstatistikPaylasim;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class Fragment_IstatistikPaylasim extends Fragment implements
 		OnClickListener {
@@ -54,9 +48,9 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 	private static final String TAG_TO_FRAGMENT = "TAG_TO_FRAGMENT";
 	private LinearLayout viewroot;
 	private Activity activity;
-	private String istatistikPaylasimURL = "http://www.aykutasil.com/api/IstatistikApi";
-	Kutuphane kutuphane = new Kutuphane();
+	private String istatistikPaylasimURL = "http://www.aykutasil.com/api/DeuIstatistikApi/DeuIstList";
 	dbSqLite db;
+	Kutuphane kutuphane = new Kutuphane();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -65,13 +59,13 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 		viewroot = (LinearLayout) inflater.inflate(
 				R.layout.fragment_istatistikpaylasim, container, false);
 
-		
 		activity = getActivity();
+		setHasOptionsMenu(true);
 
-		
-		ImageLoaderConfiguration conf = new ImageLoaderConfiguration.Builder(
-				activity).build();
-		ImageLoader.getInstance().init(conf);
+		// ////////////////
+		// ImageLoaderConfiguration conf = new ImageLoaderConfiguration.Builder(
+		// activity).build();
+		// ImageLoader.getInstance().init(conf);
 		// ///////////
 		String actionbarSubTitle = getResources().getString(
 				R.string.subtitle_istatistikpaylasim);
@@ -83,6 +77,7 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.show();
+		// //////
 		setHasOptionsMenu(true);
 
 		// /////
@@ -91,10 +86,19 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 			new getIstatistikPaylasim().execute(istatistikPaylasimURL);
 
 		} else {
-			setIstatistikList();
+			// setIstatistikList();
+			getIstatistikList();
 			showIstatistikList();
 		}
 		return viewroot;
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+
+		inflater.inflate(R.menu.fragment_istatistikpaylasim_menu, menu);
+		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	private ActionBar getActionBar() {
@@ -104,21 +108,25 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 	List<obj_IstatistikPaylasim> listaykutasilIstatistik = null;
 
 	private class getIstatistikPaylasim extends
-			AsyncTask<String, Integer, InputStream> {
+			AsyncTask<String, Integer, String> {
+
+		ProgressDialog dialog = null;
 
 		@Override
 		protected void onPreExecute() {
-			listaykutasilIstatistik = new ArrayList<obj_IstatistikPaylasim>();
+			dialog = ProgressDialog.show(activity, "DEU Ýstatistik",
+					"Yükleniyor...", true, true);
+
 		}
 
 		@Override
-		protected InputStream doInBackground(String... params) {
-			InputStream stream = null;
+		protected String doInBackground(String... params) {
+
+			String json = "";
 			try {
-				// publishProgress(20);
-				stream = downloadUrl(params[0]);
-				Log.i("Veri Ýndirildi", istatistikPaylasimURL);
-				return stream;
+				InputStream stream = kutuphane.getdownloadUrl(params[0]);
+				json = kutuphane.getStringtoInputStream(stream);
+				Log.i("Veri Ýndirildi", stream.toString());
 
 			} catch (ClientProtocolException e) {
 				e.printStackTrace();
@@ -128,21 +136,24 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 				e.printStackTrace();
 			}
 
-			return stream;
+			return json;
 		}
 
 		@Override
-		protected void onPostExecute(InputStream result) {
+		protected void onPostExecute(String result) {
 
-			String json = "";
+			String json = result;
+			Log.i("Fragment_IstatistikPaylasim", json);
+			JSONObject obje = kutuphane.getJsonObjecttoString(json);
 
-			json = getStringtoInputStream(result);
-			JSONObject obje = isJsonParser(json);
+			if (obje != null) {
+				setIstatistikList(obje);
+				getIstatistikList();
+				showIstatistikList();
 
-			setIstatistikList(obje);
-			showIstatistikList();
-
-			Log.i("Veri Çekildi", istatistikPaylasimURL);
+				Log.i("Veri Çekildi", istatistikPaylasimURL);
+			}
+			dialog.dismiss();
 		}
 
 		@Override
@@ -150,6 +161,55 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 
 			// seekbar.setProgress(values[0]);
 		}
+
+		// private Bitmap downloadBitmap(String url) {
+		// // initilize the default HTTP client object
+		// final DefaultHttpClient client = new DefaultHttpClient();
+		//
+		// //forming a HttoGet request
+		// final HttpGet getRequest = new HttpGet(url);
+		// try {
+		//
+		// HttpResponse response = client.execute(getRequest);
+		//
+		// //check 200 OK for success
+		// final int statusCode = response.getStatusLine().getStatusCode();
+		//
+		// if (statusCode != HttpStatus.SC_OK) {
+		// Log.w("ImageDownloader", "Error " + statusCode +
+		// " while retrieving bitmap from " + url);
+		// return null;
+		//
+		// }
+		//
+		// final HttpEntity entity = response.getEntity();
+		// if (entity != null) {
+		// InputStream inputStream = null;
+		// try {
+		// // getting contents from the stream
+		// inputStream = entity.getContent();
+		//
+		// // decoding stream data back into image Bitmap that android
+		// understands
+		// final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+		//
+		// return bitmap;
+		// } finally {
+		// if (inputStream != null) {
+		// inputStream.close();
+		// }
+		// entity.consumeContent();
+		// }
+		// }
+		// } catch (Exception e) {
+		// // You Could provide a more explicit error message for IOException
+		// getRequest.abort();
+		// Log.e("ImageDownloader", "Something went wrong while" +
+		// " retrieving bitmap from " + url + e.toString());
+		// }
+		//
+		// return null;
+		// }
 
 	}
 
@@ -168,7 +228,8 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 				deuist.setIst_tag(veri.getString("ist_tag"));
 				deuist.setIst_yazi(veri.getString("ist_yazi"));
 
-				listaykutasilIstatistik.add(deuist);
+				// listaykutasilIstatistik.add(deuist);
+
 				db.insertIstatistik(deuist);
 
 				Log.i("Json Array Liste", String.valueOf(i));
@@ -180,7 +241,10 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 
 	}
 
-	private void setIstatistikList() {
+	private void getIstatistikList() {
+
+		listaykutasilIstatistik = null;
+		listaykutasilIstatistik = new ArrayList<obj_IstatistikPaylasim>();
 		listaykutasilIstatistik = db.getIstatistikList();
 	}
 
@@ -190,68 +254,6 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 		ListView aykutasilComListView = (ListView) viewroot
 				.findViewById(R.id.IstatistikPaylasimListView);
 		aykutasilComListView.setAdapter(adap);
-	}
-
-	private JSONObject isJsonParser(String json) {
-		JSONObject jObj = null;
-		try {
-			if (json != null) {
-				jObj = new JSONObject(json);
-			} else {
-				jObj = null;
-			}
-
-		} catch (JSONException e) {
-			Log.e("JSON Parser", "Error parsing data "
-					+ e.getMessage().toString());
-		}
-		return jObj;
-	}
-
-	private String getStringtoInputStream(InputStream is) {
-		String sonuc = null;
-		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					is, "iso-8859-9"), 8); // iso-8859-1
-
-			StringBuilder sb = new StringBuilder();
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				sb.append(line + "/n");
-			}
-			is.close();
-			sonuc = sb.toString();
-		} catch (Exception e) {
-			Log.i("Buffer Error", "Error converting result " + e.toString());
-		}
-		return sonuc;
-
-	}
-
-	private InputStream downloadUrl(String urlString) throws IOException {
-		// URL url = new URL(urlString);
-		// HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		// conn.setReadTimeout(10000 /* milliseconds */);
-		// conn.setConnectTimeout(15000 /* milliseconds */);
-		// conn.setRequestMethod("GET");
-		// conn.setDoInput(true);
-		// // Starts the query
-		// conn.connect();
-		//
-		// InputStream stream = conn.getInputStream();
-
-		HttpClient httpClient = new DefaultHttpClient();
-
-		HttpGet httpPost = new HttpGet(urlString);
-
-		HttpResponse response = httpClient.execute(httpPost);
-
-		HttpEntity entity = response.getEntity();
-		String resultsStringg = EntityUtils.toString(entity, "ISO-8859-9");
-		InputStream stream = new ByteArrayInputStream(
-				resultsStringg.getBytes("ISO-8859-9"));
-
-		return stream;
 	}
 
 	private class istatistikPaylasimAdaptor extends BaseAdapter {
@@ -275,13 +277,11 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 
 		@Override
 		public Object getItem(int arg0) {
-			// TODO Auto-generated method stub
 			return list.get(arg0);
 		}
 
 		@Override
 		public long getItemId(int arg0) {
-			// TODO Auto-generated method stub
 			return arg0;
 		}
 
@@ -369,7 +369,8 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 						@Override
 						public void run() {
 							aykutasilOnclickListener(arg0, list.get(arg0)
-									.getIst_yazi());
+									.getIst_yazi(), list.get(arg0)
+									.getIst_konu());
 
 						}
 					}, 1000);
@@ -380,17 +381,19 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 		}
 	}
 
-	private void aykutasilOnclickListener(int position, String icerik) {
+	private void aykutasilOnclickListener(int position, String icerik,
+			String title) {
 		Log.i("aykutasilOnclickListener Týklandý", String.valueOf(position));
 
-		showEntry(icerik);
+		showEntry(icerik, title);
 
 	}
 
-	private void showEntry(String icerik) {
+	private void showEntry(String icerik, String title) {
 		Bundle args = new Bundle();
 		args.putString("name", "aykut");
 		args.putString("icerik", icerik);
+		args.putString("title", title);
 		Fragment toFragment = new Fragment_IstatistikPaylasim_Show();
 		toFragment.setArguments(args);
 		getFragmentManager().beginTransaction()
@@ -401,5 +404,30 @@ public class Fragment_IstatistikPaylasim extends Fragment implements
 	@Override
 	public void onClick(View v) {
 		Log.i("onClick", "...");
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.yenile:
+
+			if (kutuphane.internetErisimi(getActivity())) {
+				String path = kutuphane.getPathSqliteDatabase("db_depo",
+						activity);
+				SQLiteDatabase sqlite = SQLiteDatabase.openOrCreateDatabase(
+						path, null);
+				db.ReloadTables(sqlite);
+
+				new getIstatistikPaylasim().execute(istatistikPaylasimURL);
+			} else {
+				kutuphane.getAlertDialog(getActivity(), "Uyarý",
+						"Güncellemek için Lütfen internetinizi açýnýz.");
+			}
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }

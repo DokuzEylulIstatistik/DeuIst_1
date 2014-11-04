@@ -4,29 +4,17 @@ import static com.deu.deuistatistik.gcm.CommonUtilities.DISPLAY_MESSAGE_ACTION;
 import static com.deu.deuistatistik.gcm.CommonUtilities.EXTRA_MESSAGE;
 import static com.deu.deuistatistik.gcm.CommonUtilities.SENDER_ID;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -34,7 +22,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -47,11 +35,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.aka.qwerty.getNetworkSlider;
 import com.deu.deuistatistik.gcm.ServerUtilities;
 import com.deu.deuistatistik.gcm.WakeLocker;
 import com.deu.istatistik.estatXmlParser.Entry;
@@ -67,11 +57,7 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 	public static final String WIFI = "Wi-Fi";
 	public static final String ANY = "Any";
 	private static final String estatURL = "http://estat.deu.edu.tr/syndication.php?m=duyuru";
-
-	// Whether there is a Wi-Fi connection.
-	private static boolean wifiConnected = false;
-	// Whether there is a mobile connection.
-	private static boolean mobileConnected = false;
+	private static final String sliderURL = "http://www.aykutasil.com/api/DeuIstatistikApi/DeuIstSlider";
 	// Whether the display should be refreshed.
 	public static boolean refreshDisplay = true;
 
@@ -114,9 +100,6 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 		kutuphane.startFlurry(getActivity());
 
 		FlurryAgent.logEvent("Fragment_Main");
-		// FlurryAgent.setAge(25);
-		// FlurryAgent.setGender(Constants.MALE);
-		// FlurryAgent.setVersionName("1.0");
 		Log.v(TAG, "onCreateView Çalýþtý");
 
 		String subtitle = getResources().getString(R.string.subtitle_duyurular);
@@ -129,34 +112,17 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.show();
 
-		IntentFilter filter = new IntentFilter(
-				ConnectivityManager.CONNECTIVITY_ACTION);
-		receiver = new NetworkReceiver();
-		getActivity().registerReceiver(receiver, filter);
+		// IntentFilter filter = new IntentFilter(
+		// ConnectivityManager.CONNECTIVITY_ACTION);
+		// receiver = new NetworkReceiver();
+		// getActivity().registerReceiver(receiver, filter);
 
 		if (kutuphane.internetErisimi(getActivity())) {
-
 			GcmKayitIslemleri();
 		}
 
-		// ImageView yenileimage = (ImageView) rootView
-		// .findViewById(R.id.image_yenile);
-		// yenileimage.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// if (kutuphane.internetErisimi(getActivity())) {
-		// prgdialog = ProgressDialog.show(getActivity(),
-		// "Lütfen Bekleyiniz...", "Yükleniyor.", true);
-		// loadPage();
-		// } else {
-		// kutuphane.getAlertDialog(getActivity(), "Uyarý",
-		// "Güncellemek için Lütfen internetinizi açýnýz.");
-		// }
-		// }
-		// });
-
 		AcilisListviewgetRow();
+		new getNetworkSlider(sliderURL, getActivity(), rootView);
 
 		return vi;
 
@@ -166,8 +132,13 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 
 		String listviewsatirsayisi = kutuphane.getsharedPreference(
 				getActivity(), "listviewsatirsayisi");
+		if (entrylistem.size() > 0) {
+			entrylistem.clear();
+		}
 
 		if (listviewsatirsayisi != null || listviewsatirsayisi == "") {
+			ListView listview_Acilis = (ListView) rootView
+					.findViewById(R.id.listview_Acilis);
 
 			Entry entry = new Entry();
 			for (int i = 0; i < Integer.parseInt(listviewsatirsayisi); i++) {
@@ -197,9 +168,6 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 				entry1.setHtml_description(htmldescription);
 				listviewSatirDoldur(entry1);
 			}
-
-			ListView listview_Acilis = (ListView) rootView
-					.findViewById(R.id.listview_Acilis);
 
 			AcilisListViewAdapter adapp = new AcilisListViewAdapter(
 					getActivity(), entrylistem);
@@ -365,7 +333,7 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 
 				/******** Set Item Click Listner for LayoutInflater for each row *******/
 
-				vi.setOnClickListener(new OnItemClickListener(position));
+				vi.setOnClickListener(new OnItemClickListener(position, vi));
 			}
 			return vi;
 		}
@@ -377,60 +345,94 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 
 		private class OnItemClickListener implements OnClickListener {
 			private int mPosition;
+			private View mvi;
 
-			OnItemClickListener(int position) {
+			OnItemClickListener(int position, View vi) {
 				mPosition = position;
+				mvi = vi;
 			}
 
 			@Override
 			public void onClick(View arg0) {
 
-				onItemClick(mPosition);
+				Animation anim1 = AnimationUtils.loadAnimation(activity,
+						R.anim.mytranslateanimation);
+				mvi.startAnimation(anim1);
+
+				// Animation anim2 = AnimationUtils.loadAnimation(activity,
+				// R.anim.myrotateanimation);
+				//
+				// holder.text1.startAnimation(anim2);
+
+				new Handler().postDelayed(new Runnable() {
+
+					@Override
+					public void run() {
+						onItemClick(mPosition);
+					}
+				}, 500);
+
 			}
 		}
 	}
 
 	public void onItemClick(int mPosition) {
-		Entry tempValues = (Entry) entrylistem.get(mPosition);
+		showEntry(mPosition);
+		// Entry tempValues = (Entry) entrylistem.get(mPosition);
+		//
+		// LayoutInflater inflater = getActivity().getLayoutInflater();
+		// View layout = inflater.inflate(R.layout.toastcustomestat,
+		// (ViewGroup) rootView.findViewById(R.id.toast_custom_layout));
+		//
+		// WebView toast_custom_webview = (WebView) layout
+		// .findViewById(R.id.toast_custom_webview);
+		//
+		// String data = tempValues.getHtml_description();
+		// String content = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
+		// + "<html><head>"
+		// +
+		// "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />"
+		// + "<head><body>";
+		//
+		// content += data + "</body></html>";
+		//
+		// toast_custom_webview.loadData(content, "text/html; charset=utf-8",
+		// "UTF-8");
+		//
+		// AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+		// getActivity());
+		// alertDialogBuilder.setTitle(tempValues.getTitle());
+		// alertDialogBuilder
+		// .setCancelable(false)
+		// .setView(layout)
+		// .setPositiveButton("Tamam",
+		// new DialogInterface.OnClickListener() {
+		//
+		// @Override
+		// public void onClick(DialogInterface dialog,
+		// int which) {
+		// // TODO Auto-generated method stub
+		// dialog.cancel();
+		//
+		// }
+		// });
+		//
+		// AlertDialog alertDialog = alertDialogBuilder.create();
+		// alertDialog.show();
 
-		LayoutInflater inflater = getActivity().getLayoutInflater();
-		View layout = inflater.inflate(R.layout.toastcustomestat,
-				(ViewGroup) rootView.findViewById(R.id.toast_custom_layout));
+	}
 
-		WebView toast_custom_webview = (WebView) layout
-				.findViewById(R.id.toast_custom_webview);
+	private void showEntry(int position) {
+		Entry value = (Entry) entrylistem.get(position);
 
-		String data = tempValues.getHtml_description();
-		String content = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-				+ "<html><head>"
-				+ "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />"
-				+ "<head><body>";
-
-		content += data + "</body></html>";
-
-		toast_custom_webview.loadData(content, "text/html; charset=utf-8",
-				"UTF-8");
-
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-				getActivity());
-		alertDialogBuilder.setTitle(tempValues.getTitle());
-		alertDialogBuilder
-				.setCancelable(false)
-				.setView(layout)
-				.setPositiveButton("Tamam",
-						new DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// TODO Auto-generated method stub
-								dialog.cancel();
-
-							}
-						});
-
-		AlertDialog alertDialog = alertDialogBuilder.create();
-		alertDialog.show();
+		Bundle args = new Bundle();
+		args.putString("baslik", value.getHtml_title());
+		args.putString("icerik", value.getHtml_description());
+		Fragment toFragment = new Fragment_ShowEntry();
+		toFragment.setArguments(args);
+		getFragmentManager().beginTransaction()
+				.replace(R.id.container, toFragment, null).addToBackStack(null)
+				.commit();
 
 	}
 
@@ -474,6 +476,7 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 					@Override
 					protected void onPostExecute(Void result) {
 						asy = null;
+
 					}
 
 				};
@@ -538,24 +541,27 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 		}
 	}
 
-	private void updateConnectedFlags() {
-		ConnectivityManager connMgr = (ConnectivityManager) getActivity()
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-		NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
-		if (activeInfo != null && activeInfo.isConnected()) {
-			wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
-			mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
-		} else {
-			wifiConnected = false;
-			mobileConnected = false;
-		}
-	}
+	// private void updateConnectedFlags() {
+	// ConnectivityManager connMgr = (ConnectivityManager) getActivity()
+	// .getSystemService(Context.CONNECTIVITY_SERVICE);
+	//
+	// NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
+	// if (activeInfo != null && activeInfo.isConnected()) {
+	// wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
+	// mobileConnected = activeInfo.getType() ==
+	// ConnectivityManager.TYPE_MOBILE;
+	// } else {
+	// wifiConnected = false;
+	// mobileConnected = false;
+	// }
+	// }
 
 	private void loadPage() {
 
 		if (kutuphane.internetErisimi(getActivity())) {
 			new fillAcilisListView().execute(estatURL);
+			new getNetworkSlider(sliderURL, getActivity(), rootView);
+
 		} else {
 			showErrorPage();
 		}
@@ -580,28 +586,11 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 		InputStream stream = null;
 		estatXmlParser estatxmlparser = new estatXmlParser();
 		List<Entry> entries = null;
-		String title = null;
-		String url = null;
-		String summary = null;
-		Calendar rightNow = Calendar.getInstance();
-		DateFormat formatter = new SimpleDateFormat("MMM dd h:mmaa");
-
-		// Checks whether the user set the preference to include summary text
-		SharedPreferences sharedPrefs = PreferenceManager
-				.getDefaultSharedPreferences(getActivity());
-		boolean pref = sharedPrefs.getBoolean("summaryPref", false);
-
-		// StringBuilder htmlString = new StringBuilder();
-		// htmlString.append("<h3>"
-		// + getResources().getString(R.string.page_title) + "</h3>");
-		// htmlString.append("<em>" + getResources().getString(R.string.updated)
-		// + " " + formatter.format(rightNow.getTime()) + "</em>");
 
 		try {
-			stream = downloadUrl(urlString);
+			stream = kutuphane.getdownloadUrl(urlString);
 			entries = estatxmlparser.parse(stream);
-			// Makes sure that the InputStream is closed after the app is
-			// finished using it.
+
 		} finally {
 			if (stream != null) {
 				stream.close();
@@ -631,40 +620,13 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 		return "TRUE";
 	}
 
-	// Given a string representation of a URL, sets up a connection and gets
-	// an input stream.
-	private InputStream downloadUrl(String urlString) throws IOException {
-		// URL url = new URL(urlString);
-		// HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		// conn.setReadTimeout(10000 /* milliseconds */);
-		// conn.setConnectTimeout(15000 /* milliseconds */);
-		// conn.setRequestMethod("GET");
-		// conn.setDoInput(true);
-		// // Starts the query
-		// conn.connect();
-		//
-		// InputStream stream = conn.getInputStream();
-
-		HttpClient httpClient = new DefaultHttpClient();
-
-		HttpPost httpPost = new HttpPost(urlString);
-
-		HttpResponse response = httpClient.execute(httpPost);
-
-		HttpEntity entity = response.getEntity();
-		String resultsStringg = EntityUtils.toString(entity, "ISO-8859-9");
-		InputStream stream = new ByteArrayInputStream(
-				resultsStringg.getBytes("ISO-8859-9"));
-
-		return stream;
-	}
-
 	@Override
 	public void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
 		kutuphane.stopFlurry(getActivity());
-
+		// getActivity().unregisterReceiver(mHandleMessageReceiver);
+		// getActivity().unregisterReceiver(receiver);
 		Log.d("onStop", "onStop Çalýþtý");
 
 	}
@@ -678,7 +640,7 @@ public class Fragment_Main extends Fragment implements OnMenuItemClickListener {
 		// gcm.UnRegisterReceiverGcm();
 		try {
 			getActivity().unregisterReceiver(mHandleMessageReceiver);
-			getActivity().unregisterReceiver(receiver);
+			// getActivity().unregisterReceiver(receiver);
 			GCMRegistrar.onDestroy(getActivity());
 
 			Log.d("onDestroy",

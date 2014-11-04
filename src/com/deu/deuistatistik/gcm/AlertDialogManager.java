@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 
-import com.deu.istatistik.R;
-
 public class AlertDialogManager {
 	/**
 	 * Function to display simple Alert Dialog

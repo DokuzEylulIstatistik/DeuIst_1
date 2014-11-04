@@ -27,7 +27,7 @@ public class getUrlImage {
 			Bitmap map = null;
 
 			map = downloadImage(urls[0]);
-
+			
 			return map;
 		}
 
